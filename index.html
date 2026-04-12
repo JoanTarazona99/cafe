@@ -10,63 +10,98 @@
         :root { --accent: #d97706; --bg: #1a1614; --card: #211d1b; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fdfaf9; }
         .serif { font-family: 'Instrument Serif', serif; }
-        .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .input-base { background: #2a2421; border: 1px solid #3a322e; border-radius: 16px; }
+        .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 32px; }
+        .card-bg { background: #211d1b; border: 1px solid rgba(255,255,255,0.03); border-radius: 48px; }
+        .input-base { background: #2a2421; border: 1px solid #3a322e; border-radius: 12px; }
         .btn-primary { background: var(--accent); color: #000; font-weight: 700; border-radius: 9999px; }
-        .card-rounded { border-radius: 48px; border: 1px solid rgba(255,255,255,0.04); background: #211d1b; }
-        ::placeholder { color: #52525b; }
     </style>
 </head>
-<body class="min-h-screen p-8 md:p-20">
-    <div class="max-w-[1400px] mx-auto">
-        <header class="flex justify-between items-center mb-24 px-4">
+<body class="min-h-screen p-8 md:p-16 lg:p-24 overflow-x-hidden">
+    <div class="max-w-[1500px] mx-auto">
+        <header class="flex justify-between items-center mb-16 px-6">
             <div class="flex items-center gap-3">
                 <span class="text-2xl">☕</span>
                 <span class="font-bold text-lg tracking-tight">Café · Captura de pedidos</span>
             </div>
-            <button id="themeToggle" class="opacity-40 hover:opacity-100 transition-opacity text-xl">🌙</button>
+            <button class="opacity-30 hover:opacity-100 transition-opacity">🌙</button>
         </header>
 
-        <div class="grid lg:grid-cols-12 gap-16 mb-24">
-            <div class="lg:col-span-7 space-y-12">
-                <div class="space-y-8">
-                    <span class="text-orange-500 text-[11px] font-bold tracking-[0.4em] uppercase">Entrada Rápida</span>
-                    <h1 class="serif text-8xl md:text-[10rem] leading-[0.8] tracking-tighter">Registra pedidos, clientes y notas del turno en una sola vista.</h1>
-                    <p class="text-zinc-500 text-xl max-w-lg leading-relaxed font-medium">Esta página permite capturar datos del cliente, bebida, tamaño y estado con un resumen inmediato en pantalla.</p>
+        <div class="grid lg:grid-cols-12 gap-x-20 gap-y-24">
+            <!-- Left Hero -->
+            <div class="lg:col-span-7 space-y-16 px-6">
+                <div class="space-y-10">
+                    <span class="text-orange-500 text-[11px] font-black tracking-[0.4em] uppercase">Entrada Rápida</span>
+                    <h1 class="serif text-8xl md:text-[10rem] lg:text-[11rem] leading-[0.8] tracking-tighter">Registra pedidos, clientes y notas del turno en una sola vista.</h1>
+                    <p class="text-zinc-500 text-xl max-w-xl leading-relaxed">Esta página permite capturar datos del cliente, bebida, tamaño y estado con un resumen inmediato en pantalla.</p>
                 </div>
-
                 <div class="flex gap-4">
-                    <div class="glass p-10 rounded-[40px] flex-1 text-center">
-                        <span class="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-3 block">Campos clave</span>
+                    <div class="glass p-10 flex-1 text-center">
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Campos clave</span>
                         <span class="text-5xl font-light">8</span>
                     </div>
-                    <div class="glass p-10 rounded-[40px] flex-1 text-center">
-                        <span class="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-3 block">Modo visual</span>
-                        <span class="text-xl font-bold leading-tight">Claro / Oscuro</span>
+                    <div class="glass p-10 flex-1 text-center">
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Modo visual</span>
+                        <span class="text-xl font-bold">Claro / Oscuro</span>
                     </div>
-                    <div class="glass p-10 rounded-[40px] flex-1 text-center">
-                        <span class="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-3 block">Almacenamiento</span>
+                    <div class="glass p-10 flex-1 text-center">
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Almacenamiento</span>
                         <span class="text-xl font-bold leading-tight">Local</span>
                     </div>
                 </div>
             </div>
 
-            <div class="lg:col-span-5">
-                <div class="card-rounded p-12 shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-2">Nuevo registro</h2>
+            <!-- Right Form -->
+            <div class="lg:col-span-5 px-6">
+                <div class="card-bg p-12 shadow-2xl">
+                    <h2 class="text-3xl font-bold mb-3">Nuevo registro</h2>
                     <p class="text-zinc-500 text-sm mb-12">Completa el formulario y guarda la entrada.</p>
                     <form class="space-y-8">
                         <div class="grid grid-cols-2 gap-6">
-                            <input type="text" placeholder="Cliente" class="w-full input-base p-5 outline-none">
-                            <input type="text" placeholder="Teléfono" class="w-full input-base p-5 outline-none">
+                            <input type="text" placeholder="Cliente" class="w-full input-base p-5 outline-none text-sm">
+                            <input type="text" placeholder="Teléfono" class="w-full input-base p-5 outline-none text-sm">
                         </div>
                         <div class="grid grid-cols-2 gap-6">
                             <select class="w-full input-base p-5 outline-none appearance-none"><option>Bebida</option></select>
                             <select class="w-full input-base p-5 outline-none appearance-none"><option>Tamaño</option></select>
                         </div>
-                        <textarea placeholder="Notas..." class="w-full input-base p-5 h-40 outline-none resize-none"></textarea>
-                        <button class="w-full btn-primary py-5 text-sm uppercase tracking-widest transition-all">Guardar registro</button>
+                        <textarea placeholder="Notas del pedido..." class="w-full input-base p-5 h-48 outline-none resize-none text-sm"></textarea>
+                        <div class="flex gap-4 pt-6">
+                            <button class="flex-1 btn-primary py-5 text-sm uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">Guardar registro</button>
+                            <button class="px-10 glass rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white/5">Limpiar</button>
+                        </div>
                     </form>
+                </div>
+            </div>
+
+            <!-- Bottom Sections -->
+            <div class="lg:col-span-12 grid lg:grid-cols-12 gap-12 px-6">
+                <div class="lg:col-span-5 card-bg p-12">
+                    <span class="text-zinc-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-10 block">Resumen</span>
+                    <h3 class="text-2xl font-bold mb-16">Estado actual</h3>
+                    <div class="space-y-12">
+                        <div>
+                            <span class="text-zinc-600 text-[10px] uppercase block mb-4">Total registros</span>
+                            <div class="text-[9rem] font-light leading-none tracking-tighter">0</div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <span class="text-zinc-600 text-[10px] uppercase block mb-2">Última bebida</span>
+                                <div class="font-bold text-zinc-400">Sin datos</div>
+                            </div>
+                            <div>
+                                <span class="text-zinc-600 text-[10px] uppercase block mb-2">Último estado</span>
+                                <div class="font-bold text-orange-500">Nuevo</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-7 card-bg p-12">
+                    <span class="text-zinc-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-10 block">Actividad</span>
+                    <h3 class="text-2xl font-bold mb-16">Entradas recientes</h3>
+                    <div class="flex flex-col items-center justify-center py-40 opacity-20">
+                        <div class="text-8xl mb-8">☕</div>
+                        <p class="text-lg">Aún no hay registros en la sesión actual.</p>
+                    </div>
                 </div>
             </div>
         </div>
