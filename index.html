@@ -5,139 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Café · Captura de pedidos</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #d97706; --bg: #1a1614; --card: #241f1c; }
+        :root { --accent: #d97706; --bg: #1a1614; --card: #211d1b; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fdfaf9; }
         .serif { font-family: 'Instrument Serif', serif; }
         .glass { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .input-base { background: #2a2421; border: 1px solid #3a322e; border-radius: 12px; }
-        .btn-primary { background: var(--accent); color: #1a1614; font-weight: 600; }
+        .input-base { background: #2a2421; border: 1px solid #3a322e; border-radius: 16px; }
+        .btn-primary { background: var(--accent); color: #000; font-weight: 700; border-radius: 9999px; }
+        .card-rounded { border-radius: 48px; border: 1px solid rgba(255,255,255,0.04); background: #211d1b; }
+        ::placeholder { color: #52525b; }
     </style>
 </head>
-<body class="min-h-screen p-6 md:p-12">
+<body class="min-h-screen p-8 md:p-20">
     <div class="max-w-[1400px] mx-auto">
-        <!-- Header -->
-        <header class="flex justify-between items-center mb-16">
-            <div class="flex items-center gap-2">
+        <header class="flex justify-between items-center mb-24 px-4">
+            <div class="flex items-center gap-3">
                 <span class="text-2xl">☕</span>
-                <span class="font-semibold text-lg">Café · Captura de pedidos</span>
+                <span class="font-bold text-lg tracking-tight">Café · Captura de pedidos</span>
             </div>
-            <button id="themeToggle" class="opacity-50 hover:opacity-100 transition-opacity">🌙</button>
+            <button id="themeToggle" class="opacity-40 hover:opacity-100 transition-opacity text-xl">🌙</button>
         </header>
 
-        <div class="grid lg:grid-cols-2 gap-20">
-            <!-- Left Content -->
-            <div class="space-y-12">
-                <div class="space-y-6">
-                    <span class="text-orange-500 text-[10px] font-bold tracking-[0.2em] uppercase">Entrada Rápida</span>
-                    <h1 class="serif text-7xl md:text-8xl leading-[0.9] tracking-tight">Registra pedidos, clientes y notas del turno en una sola vista.</h1>
-                    <p class="text-zinc-500 text-lg max-w-md">Esta página permite capturar datos del cliente, bebida, tamaño y estado con un resumen inmediato en pantalla.</p>
+        <div class="grid lg:grid-cols-12 gap-16 mb-24">
+            <div class="lg:col-span-7 space-y-12">
+                <div class="space-y-8">
+                    <span class="text-orange-500 text-[11px] font-bold tracking-[0.4em] uppercase">Entrada Rápida</span>
+                    <h1 class="serif text-8xl md:text-[10rem] leading-[0.8] tracking-tighter">Registra pedidos, clientes y notas del turno en una sola vista.</h1>
+                    <p class="text-zinc-500 text-xl max-w-lg leading-relaxed font-medium">Esta página permite capturar datos del cliente, bebida, tamaño y estado con un resumen inmediato en pantalla.</p>
                 </div>
 
                 <div class="flex gap-4">
-                    <div class="glass px-8 py-6 rounded-3xl flex-1">
-                        <span class="text-zinc-500 text-[10px] uppercase mb-2 block font-medium">Campos clave</span>
-                        <span class="text-3xl font-light">8</span>
+                    <div class="glass p-10 rounded-[40px] flex-1 text-center">
+                        <span class="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-3 block">Campos clave</span>
+                        <span class="text-5xl font-light">8</span>
                     </div>
-                    <div class="glass px-8 py-6 rounded-3xl flex-1">
-                        <span class="text-zinc-500 text-[10px] uppercase mb-2 block font-medium">Modo visual</span>
-                        <span class="text-xl font-medium">Claro/Oscuro</span>
+                    <div class="glass p-10 rounded-[40px] flex-1 text-center">
+                        <span class="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-3 block">Modo visual</span>
+                        <span class="text-xl font-bold leading-tight">Claro / Oscuro</span>
                     </div>
-                    <div class="glass px-8 py-6 rounded-3xl flex-1">
-                        <span class="text-zinc-500 text-[10px] uppercase mb-2 block font-medium">Almacenamiento</span>
-                        <span class="text-xl font-medium leading-tight">Local en memoria</span>
+                    <div class="glass p-10 rounded-[40px] flex-1 text-center">
+                        <span class="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-3 block">Almacenamiento</span>
+                        <span class="text-xl font-bold leading-tight">Local</span>
                     </div>
-                </div>
-
-                <!-- NEW FORM CARD -->
-                <div class="bg-[#241f1c] p-10 rounded-[40px] border border-white/5">
-                    <h2 class="text-2xl font-semibold mb-1">Nuevo registro</h2>
-                    <p class="text-zinc-500 text-sm mb-8">Completa el formulario y guarda la entrada para verla reflejada.</p>
-                    
-                    <form class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-2">
-                                <label class="text-xs font-medium text-zinc-400 ml-1">Cliente</label>
-                                <input type="text" placeholder="Ej. Carlos Tarazona" class="w-full input-base p-4 outline-none focus:border-orange-500/50 transition-colors">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-medium text-zinc-400 ml-1">Teléfono</label>
-                                <input type="text" placeholder="+7 900 000 00 00" class="w-full input-base p-4 outline-none">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-2">
-                                <label class="text-xs font-medium text-zinc-400 ml-1">Bebida</label>
-                                <select class="w-full input-base p-4 outline-none appearance-none">
-                                    <option>Selecciona una opción</option>
-                                    <option>Espresso</option>
-                                    <option>Latte</option>
-                                </select>
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-medium text-zinc-400 ml-1">Tamaño</label>
-                                <select class="w-full input-base p-4 outline-none appearance-none">
-                                    <option>Selecciona tamaño</option>
-                                    <option>Mediano</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="space-y-2">
-                                <label class="text-xs font-medium text-zinc-400 ml-1">Azúcar</label>
-                                <input type="number" value="0" class="w-full input-base p-4 outline-none">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-xs font-medium text-zinc-400 ml-1">Estado</label>
-                                <select class="w-full input-base p-4 outline-none appearance-none">
-                                    <option>Nuevo</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs font-medium text-zinc-400 ml-1">Notas</label>
-                            <textarea placeholder="Sin lactosa, extra canela..." class="w-full input-base p-4 h-32 outline-none resize-none"></textarea>
-                        </div>
-                        <div class="flex gap-4 pt-4">
-                            <button class="flex-1 btn-primary py-4 rounded-full hover:brightness-110 transition-all">Guardar registro</button>
-                            <button class="px-8 glass rounded-full text-sm font-medium hover:bg-white/5">Limpiar formulario</button>
-                        </div>
-                    </form>
                 </div>
             </div>
 
-            <!-- Right Content -->
-            <div class="space-y-8">
-                <div class="bg-[#241f1c] p-10 rounded-[40px] border border-white/5">
-                    <span class="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-8 block">Resumen</span>
-                    <h3 class="text-lg font-medium mb-12">Estado actual</h3>
-                    
-                    <div class="space-y-10">
-                        <div class="space-y-1">
-                            <span class="text-zinc-500 text-[10px] uppercase">Total de registros</span>
-                            <div class="text-5xl font-light">0</div>
+            <div class="lg:col-span-5">
+                <div class="card-rounded p-12 shadow-2xl">
+                    <h2 class="text-3xl font-bold mb-2">Nuevo registro</h2>
+                    <p class="text-zinc-500 text-sm mb-12">Completa el formulario y guarda la entrada.</p>
+                    <form class="space-y-8">
+                        <div class="grid grid-cols-2 gap-6">
+                            <input type="text" placeholder="Cliente" class="w-full input-base p-5 outline-none">
+                            <input type="text" placeholder="Teléfono" class="w-full input-base p-5 outline-none">
                         </div>
-                        <div class="grid grid-cols-2 gap-8">
-                            <div class="space-y-1">
-                                <span class="text-zinc-500 text-[10px] uppercase">Última bebida</span>
-                                <div class="font-medium text-sm">Sin registros</div>
-                            </div>
-                            <div class="space-y-1">
-                                <span class="text-zinc-500 text-[10px] uppercase">Último estado</span>
-                                <div class="font-medium text-sm">Sin registros</div>
-                            </div>
+                        <div class="grid grid-cols-2 gap-6">
+                            <select class="w-full input-base p-5 outline-none appearance-none"><option>Bebida</option></select>
+                            <select class="w-full input-base p-5 outline-none appearance-none"><option>Tamaño</option></select>
                         </div>
-                    </div>
-                </div>
-
-                <div class="bg-[#241f1c] p-10 rounded-[40px] border border-white/5">
-                    <span class="text-zinc-500 text-[10px] font-bold tracking-widest uppercase mb-8 block">Actividad</span>
-                    <h3 class="text-lg font-medium mb-10">Entradas recientes</h3>
-                    <div class="py-20 text-center space-y-2">
-                        <p class="text-zinc-500 text-sm">Aún no hay registros.</p>
-                        <p class="text-zinc-600 text-xs">Usa el formulario para crear la primera entrada.</p>
-                    </div>
+                        <textarea placeholder="Notas..." class="w-full input-base p-5 h-40 outline-none resize-none"></textarea>
+                        <button class="w-full btn-primary py-5 text-sm uppercase tracking-widest transition-all">Guardar registro</button>
+                    </form>
                 </div>
             </div>
         </div>
