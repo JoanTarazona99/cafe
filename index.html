@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --accent: #d97706; --bg: #1a1614; --card: #211d1b; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fdfaf9; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: #fdfaf9; margin: 0; }
         .serif { font-family: 'Instrument Serif', serif; }
         .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 32px; }
         .card-bg { background: #211d1b; border: 1px solid rgba(255,255,255,0.03); border-radius: 48px; }
@@ -27,7 +27,7 @@
         </header>
 
         <div class="grid lg:grid-cols-12 gap-x-20 gap-y-24">
-            <!-- Left Hero -->
+            <!-- Left: Hero -->
             <div class="lg:col-span-7 space-y-16 px-6">
                 <div class="space-y-10">
                     <span class="text-orange-500 text-[11px] font-black tracking-[0.4em] uppercase">Entrada Rápida</span>
@@ -36,23 +36,23 @@
                 </div>
                 <div class="flex gap-4">
                     <div class="glass p-10 flex-1 text-center">
-                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Campos clave</span>
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block text-center">Campos clave</span>
                         <span class="text-5xl font-light">8</span>
                     </div>
                     <div class="glass p-10 flex-1 text-center">
-                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Modo visual</span>
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block text-center">Modo visual</span>
                         <span class="text-xl font-bold">Claro / Oscuro</span>
                     </div>
                     <div class="glass p-10 flex-1 text-center">
-                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Almacenamiento</span>
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block text-center">Almacenamiento</span>
                         <span class="text-xl font-bold leading-tight">Local</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Form -->
+            <!-- Right: Form -->
             <div class="lg:col-span-5 px-6">
-                <div class="card-bg p-12 shadow-2xl">
+                <div class="card-bg p-12 shadow-2xl h-fit">
                     <h2 class="text-3xl font-bold mb-3">Nuevo registro</h2>
                     <p class="text-zinc-500 text-sm mb-12">Completa el formulario y guarda la entrada.</p>
                     <form class="space-y-8">
@@ -66,16 +66,16 @@
                         </div>
                         <textarea placeholder="Notas del pedido..." class="w-full input-base p-5 h-48 outline-none resize-none text-sm"></textarea>
                         <div class="flex gap-4 pt-6">
-                            <button class="flex-1 btn-primary py-5 text-sm uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all">Guardar registro</button>
+                            <button class="flex-1 btn-primary py-5 text-sm uppercase tracking-widest transition-all">Guardar registro</button>
                             <button class="px-10 glass rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white/5">Limpiar</button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <!-- Bottom Sections -->
-            <div class="lg:col-span-12 grid lg:grid-cols-12 gap-12 px-6">
-                <div class="lg:col-span-5 card-bg p-12">
+            <!-- Bottom Section -->
+            <div class="lg:col-span-5 px-6">
+                <div class="card-bg p-12 h-full">
                     <span class="text-zinc-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-10 block">Resumen</span>
                     <h3 class="text-2xl font-bold mb-16">Estado actual</h3>
                     <div class="space-y-12">
@@ -85,17 +85,19 @@
                         </div>
                         <div class="grid grid-cols-2 gap-8">
                             <div>
-                                <span class="text-zinc-600 text-[10px] uppercase block mb-2">Última bebida</span>
+                                <span class="text-zinc-600 text-[10px] uppercase block mb-2 font-bold tracking-widest">Última bebida</span>
                                 <div class="font-bold text-zinc-400">Sin datos</div>
                             </div>
                             <div>
-                                <span class="text-zinc-600 text-[10px] uppercase block mb-2">Último estado</span>
+                                <span class="text-zinc-600 text-[10px] uppercase block mb-2 font-bold tracking-widest">Último estado</span>
                                 <div class="font-bold text-orange-500">Nuevo</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="lg:col-span-7 card-bg p-12">
+            </div>
+            <div class="lg:col-span-7 px-6">
+                <div class="card-bg p-12 h-full">
                     <span class="text-zinc-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-10 block">Actividad</span>
                     <h3 class="text-2xl font-bold mb-16">Entradas recientes</h3>
                     <div class="flex flex-col items-center justify-center py-40 opacity-20">
