@@ -12,121 +12,100 @@
         .serif { font-family: 'Instrument Serif', serif; }
         .glass { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 32px; }
         .card-bg { background: #211d1b; border: 1px solid rgba(255,255,255,0.03); border-radius: 48px; }
-        .input-base { background: #2a2421; border: 1px solid #3a322e; border-radius: 16px; }
+        .input-base { background: #2a2421; border: 1px solid #3a322e; border-radius: 12px; }
         .btn-primary { background: var(--accent); color: #000; font-weight: 800; border-radius: 9999px; }
-        .tracking-super { tracking-wider: 0.4em; }
     </style>
 </head>
 <body class="min-h-screen p-8 md:p-16 lg:p-24 overflow-x-hidden">
     <div class="max-w-[1600px] mx-auto">
-        <!-- Header -->
-        <header class="flex justify-between items-center mb-24 px-6">
-            <div class="flex items-center gap-4">
-                <span class="text-3xl">☕</span>
-                <span class="font-extrabold text-xl tracking-tight">Café · Captura de pedidos</span>
+        <header class="flex justify-between items-center mb-16 px-6">
+            <div class="flex items-center gap-3">
+                <span class="text-2xl">☕</span>
+                <span class="font-bold text-lg tracking-tight">Café · Captura de pedidos</span>
             </div>
-            <button class="opacity-30 hover:opacity-100 transition-opacity text-xl">🌙</button>
+            <button class="opacity-30 hover:opacity-100 transition-opacity">🌙</button>
         </header>
 
-        <!-- Layout Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-x-20 gap-y-24">
-            <!-- Left Hero (7 cols) -->
-            <div class="md:col-span-7 space-y-16 px-6">
+        <!-- Forced 12-column grid for side-by-side even on small desktops -->
+        <div class="grid grid-cols-12 gap-x-12 gap-y-24">
+            <!-- Left: Hero (7 cols) -->
+            <div class="col-span-12 md:col-span-7 space-y-16 px-6">
                 <div class="space-y-10">
-                    <span class="text-orange-500 text-[12px] font-black tracking-[0.5em] uppercase">Entrada Rápida</span>
-                    <h1 class="serif text-8xl md:text-[11rem] lg:text-[13rem] leading-[0.75] tracking-tighter">Registra pedidos, clientes y notas del turno en una sola vista.</h1>
+                    <span class="text-orange-500 text-[11px] font-black tracking-[0.5em] uppercase">Entrada Rápida</span>
+                    <h1 class="serif text-[clamp(4rem,12vw,14rem)] leading-[0.75] tracking-tighter">Registra pedidos, clientes y notas del turno en una sola vista.</h1>
                     <p class="text-zinc-500 text-2xl max-w-xl leading-relaxed font-medium">Esta página permite capturar datos del cliente, bebida, tamaño y estado con un resumen inmediato en pantalla.</p>
                 </div>
-                <div class="flex gap-6">
-                    <div class="glass p-12 flex-1 text-center">
-                        <span class="text-zinc-600 text-[11px] uppercase font-black tracking-widest mb-4 block">Campos clave</span>
-                        <span class="text-6xl font-light">8</span>
+                <div class="flex gap-4">
+                    <div class="glass p-10 flex-1 text-center">
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Campos clave</span>
+                        <span class="text-5xl font-light">8</span>
                     </div>
-                    <div class="glass p-12 flex-1 text-center">
-                        <span class="text-zinc-600 text-[11px] uppercase font-black tracking-widest mb-4 block">Modo visual</span>
-                        <span class="text-xl font-extrabold">Claro / Oscuro</span>
+                    <div class="glass p-10 flex-1 text-center">
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Modo visual</span>
+                        <span class="text-xl font-bold">Claro / Oscuro</span>
                     </div>
-                    <div class="glass p-12 flex-1 text-center">
-                        <span class="text-zinc-600 text-[11px] uppercase font-black tracking-widest mb-4 block">Almacenamiento</span>
-                        <span class="text-xl font-extrabold leading-tight">Local</span>
+                    <div class="glass p-10 flex-1 text-center">
+                        <span class="text-zinc-600 text-[10px] uppercase font-bold tracking-widest mb-3 block">Almacenamiento</span>
+                        <span class="text-xl font-bold leading-tight">Local</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Form (5 cols) -->
-            <div class="md:col-span-5 px-6">
-                <div class="card-bg p-12 shadow-2xl sticky top-12">
-                    <h2 class="text-4xl font-extrabold mb-4">Nuevo registro</h2>
-                    <p class="text-zinc-500 text-lg mb-12 font-medium">Completa el formulario y guarda la entrada.</p>
+            <!-- Right: Form (5 cols) -->
+            <div class="col-span-12 md:col-span-5 px-6">
+                <div class="card-bg p-12 shadow-2xl h-fit">
+                    <h2 class="text-3xl font-bold mb-3">Nuevo registro</h2>
+                    <p class="text-zinc-500 text-sm mb-12">Completa el formulario y guarda la entrada.</p>
                     <form class="space-y-8">
                         <div class="grid grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black uppercase tracking-widest text-zinc-500 ml-1">Cliente</label>
-                                <input type="text" placeholder="Nombre..." class="w-full input-base p-6 outline-none text-base">
-                            </div>
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black uppercase tracking-widest text-zinc-500 ml-1">Teléfono</label>
-                                <input type="text" placeholder="+7..." class="w-full input-base p-6 outline-none text-base">
-                            </div>
+                            <input type="text" placeholder="Cliente" class="w-full input-base p-5 outline-none text-sm">
+                            <input type="text" placeholder="Teléfono" class="w-full input-base p-5 outline-none text-sm">
                         </div>
                         <div class="grid grid-cols-2 gap-6">
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black uppercase tracking-widest text-zinc-500 ml-1">Bebida</label>
-                                <select class="w-full input-base p-6 outline-none appearance-none cursor-pointer"><option>Latte</option></select>
-                            </div>
-                            <div class="space-y-3">
-                                <label class="text-[11px] font-black uppercase tracking-widest text-zinc-500 ml-1">Tamaño</label>
-                                <select class="w-full input-base p-6 outline-none appearance-none cursor-pointer"><option>Grande</option></select>
-                            </div>
+                            <select class="w-full input-base p-5 outline-none appearance-none"><option>Bebida</option></select>
+                            <select class="w-full input-base p-5 outline-none appearance-none"><option>Tamaño</option></select>
                         </div>
-                        <div class="space-y-3">
-                            <label class="text-[11px] font-black uppercase tracking-widest text-zinc-500 ml-1">Notas</label>
-                            <textarea placeholder="Observaciones del pedido..." class="w-full input-base p-6 h-56 outline-none resize-none text-base"></textarea>
-                        </div>
-                        <div class="flex gap-6 pt-8">
-                            <button class="flex-1 btn-primary py-6 text-base uppercase tracking-widest hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-orange-900/20">Guardar registro</button>
-                            <button class="px-12 glass rounded-full text-[11px] font-black uppercase tracking-widest hover:bg-white/5 transition-all">Limpiar</button>
+                        <textarea placeholder="Notas del pedido..." class="w-full input-base p-5 h-48 outline-none resize-none text-sm"></textarea>
+                        <div class="flex gap-4 pt-6">
+                            <button class="flex-1 btn-primary py-5 text-sm uppercase tracking-widest transition-all">Guardar registro</button>
+                            <button class="px-10 glass rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-white/5">Limpiar</button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <!-- Bottom Row (Summary/Activity) -->
-            <div class="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-12 px-6 mt-12">
-                <div class="md:col-span-5 card-bg p-12">
-                    <span class="text-zinc-500 text-[11px] font-black tracking-widest uppercase mb-12 block">Resumen</span>
-                    <h3 class="text-3xl font-extrabold mb-16">Estado actual</h3>
-                    <div class="space-y-16">
+            <!-- Bottom Sections -->
+            <div class="col-span-12 grid grid-cols-12 gap-12 px-6">
+                <div class="col-span-12 md:col-span-5 card-bg p-12">
+                    <span class="text-zinc-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-10 block">Resumen</span>
+                    <h3 class="text-2xl font-bold mb-16">Estado actual</h3>
+                    <div class="space-y-12">
                         <div>
-                            <span class="text-zinc-600 text-[11px] uppercase font-black block mb-6">Total registros</span>
-                            <div class="text-[11rem] font-light leading-none tracking-tighter">0</div>
+                            <span class="text-zinc-600 text-[10px] uppercase block mb-4">Total registros</span>
+                            <div class="text-[10rem] font-light leading-none tracking-tighter">0</div>
                         </div>
-                        <div class="grid grid-cols-2 gap-12">
+                        <div class="grid grid-cols-2 gap-8">
                             <div>
-                                <span class="text-zinc-600 text-[11px] uppercase font-black block mb-3">Última bebida</span>
-                                <div class="font-extrabold text-2xl text-zinc-400">---</div>
+                                <span class="text-zinc-600 text-[10px] uppercase block mb-2 font-bold">Última bebida</span>
+                                <div class="font-bold text-zinc-400">---</div>
                             </div>
                             <div>
-                                <span class="text-zinc-600 text-[11px] uppercase font-black block mb-3">Último estado</span>
-                                <div class="font-extrabold text-2xl text-orange-500 italic serif">Nuevo</div>
+                                <span class="text-zinc-600 text-[10px] uppercase block mb-2 font-bold">Último estado</span>
+                                <div class="font-bold text-orange-500">Nuevo</div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="md:col-span-7 card-bg p-12">
-                    <span class="text-zinc-500 text-[11px] font-black tracking-widest uppercase mb-12 block">Actividad</span>
-                    <h3 class="text-3xl font-extrabold mb-16">Entradas recientes</h3>
-                    <div class="flex flex-col items-center justify-center py-48 opacity-10">
-                        <div class="text-9xl mb-10">📜</div>
-                        <p class="text-2xl font-medium tracking-tight">Sin actividad reciente registrada.</p>
+                <div class="col-span-12 md:col-span-7 card-bg p-12">
+                    <span class="text-zinc-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-10 block">Actividad</span>
+                    <h3 class="text-2xl font-bold mb-16">Entradas recientes</h3>
+                    <div class="flex flex-col items-center justify-center py-40 opacity-10">
+                        <div class="text-9xl mb-8">☕</div>
+                        <p class="text-lg">Aún no hay registros.</p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <footer class="mt-32 px-6 opacity-20">
-            <p class="text-[11px] font-black tracking-[0.5em] uppercase text-center">Joan Tarazona · Master in AI Project · 2026</p>
-        </footer>
     </div>
 </body>
 </html>
