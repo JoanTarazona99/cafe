@@ -51,4 +51,3 @@ jobs:
             git commit -m "chore(deploy): publish dist to repo root [skip ci]"
             git push origin main
           fi
-YAML
