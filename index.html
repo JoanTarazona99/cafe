@@ -1,271 +1,403 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="es" data-theme="light">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Café · Оценка успешности</title>
-    <meta name="description" content="Интерфейс для оценки потенциальной успешности предприятия общественного питания." />
-    <link rel="preconnect" href="https://api.fontshare.com" />
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=boska@500,700&display=swap" rel="stylesheet">
-    <style>
-        :root, [data-theme="light"] {
-            --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
-            --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
-            --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-            --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
-            --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-            --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
-            --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem;
-            --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
-            --space-12: 3rem; --space-16: 4rem;
-            --color-bg:#f7f3ef; --color-surface:#fcfaf7; --color-surface-2:#f2ece6;
-            --color-border:#d8cec4; --color-text:#2d2118; --color-text-muted:#6f655d;
-            --color-primary:#6f4e37; --color-primary-hover:#573a27; --color-accent:#c08a5b;
-            --color-success:#3f6b46; --color-danger:#9e3f3f; --color-text-inverse:#fffaf5;
-            --radius-sm:.5rem; --radius-md:.85rem; --radius-lg:1.25rem; --radius-full:9999px;
-            --shadow-sm: 0 6px 20px rgba(64,38,18,.08); --shadow-md: 0 18px 42px rgba(64,38,18,.12);
-            --font-body:'Satoshi', Inter, sans-serif; --font-display:'Boska', Georgia, serif;
-        }
-        [data-theme="dark"] {
-            --color-bg:#181311; --color-surface:#231c18; --color-surface-2:#2d2520;
-            --color-border:#4a3c34; --color-text:#f2e9df; --color-text-muted:#b8ab9e;
-            --color-primary:#c08a5b; --color-primary-hover:#d6a477; --color-accent:#8b5e3c;
-            --color-success:#7ec08a; --color-danger:#d97f7f; --color-text-inverse:#1a1412;
-            --shadow-sm: 0 6px 20px rgba(0,0,0,.25); --shadow-md: 0 18px 42px rgba(0,0,0,.35);
-        }
-        *,*::before,*::after{box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{margin:0; min-height:100vh; font-family:var(--font-body); background:linear-gradient(180deg,var(--color-bg),var(--color-surface-2)); color:var(--color-text); line-height:1.6}
-        button,input,select,textarea{font:inherit}
-        .shell{max-width:1180px;margin:0 auto;padding:var(--space-4)}
-        .topbar{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);padding:var(--space-4) 0}
-        .brand{display:flex;align-items:center;gap:.8rem;font-weight:700}
-        .brand svg{width:38px;height:38px;color:var(--color-primary)}
-        .brand span{font-size:var(--text-lg)}
-        .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--space-8);align-items:start;padding:var(--space-8) 0 var(--space-12)}
-        .hero-copy h1{font-family:var(--font-display);font-size:var(--text-2xl);line-height:1.02;margin:0 0 var(--space-4)}
-        .hero-copy p{font-size:var(--text-base);color:var(--color-text-muted);max-width:58ch;margin:0 0 var(--space-6)}
-        .panel{background:color-mix(in srgb, var(--color-surface) 94%, transparent);border:1px solid var(--color-border);border-radius:calc(var(--radius-lg) + 2px);box-shadow:var(--shadow-md)}
-        .form-panel{padding:var(--space-6)}
-        .panel h2{margin:0 0 var(--space-2);font-size:var(--text-xl)}
-        form{display:grid;gap:var(--space-4)}
-        .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}
-        .field{display:grid;gap:.45rem}
-        label{font-size:var(--text-sm);font-weight:700}
-        select{width:100%;border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);border-radius:var(--radius-md);padding:.9rem 1rem;min-height:48px;outline:none}
-        .actions{display:flex;flex-wrap:wrap;gap:var(--space-3);padding-top:var(--space-2)}
-        .btn{min-height:48px;padding:.9rem 1.2rem;border-radius:var(--radius-full);border:none;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:.6rem;cursor:pointer}
-        .btn-primary{background:var(--color-primary);color:var(--color-text-inverse)}
-        .btn-secondary{background:transparent;border:1px solid var(--color-border);color:var(--color-text)}
-        .summary{padding:var(--space-6);display:grid;gap:var(--space-4)}
-        .summary-card{background:var(--color-surface-2);border:1px solid var(--color-border);padding:var(--space-4);border-radius:var(--radius-lg)}
-        .lang-toggle{position: fixed; bottom: 20px; right: 20px; display: flex; gap: 10px; z-index: 100;}
-        @media (max-width: 900px){.hero{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Café · Entrada de datos</title>
+  <meta name="description" content="Aplicación estática para registrar pedidos y clientes de una cafetería." data-i18n="meta.description" data-i18n-attr="content" />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=boska@500,700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem;
+      --color-bg:#f7f3ef; --color-surface:#fcfaf7; --color-surface-2:#f2ece6; --color-border:#d8cec4; --color-text:#2d2118; --color-text-muted:#6f655d; --color-primary:#6f4e37; --color-primary-hover:#573a27; --color-accent:#c08a5b; --color-success:#3f6b46; --color-danger:#9e3f3f; --color-text-inverse:#fffaf5;
+      --radius-sm:.5rem; --radius-md:.85rem; --radius-lg:1.25rem; --radius-full:9999px;
+      --shadow-sm: 0 6px 20px rgba(64,38,18,.08); --shadow-md: 0 18px 42px rgba(64,38,18,.12);
+      --font-body:'Satoshi', Inter, sans-serif; --font-display:'Boska', Georgia, serif;
+    }
+    [data-theme="dark"] {
+      --color-bg:#181311; --color-surface:#231c18; --color-surface-2:#2d2520; --color-border:#4a3c34; --color-text:#f2e9df; --color-text-muted:#b8ab9e; --color-primary:#c08a5b; --color-primary-hover:#d6a477; --color-accent:#8b5e3c; --color-success:#7ec08a; --color-danger:#d97f7f; --color-text-inverse:#1a1412;
+      --shadow-sm: 0 6px 20px rgba(0,0,0,.25); --shadow-md: 0 18px 42px rgba(0,0,0,.35);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0; min-height:100vh; font-family:var(--font-body); background:linear-gradient(180deg,var(--color-bg),var(--color-surface-2)); color:var(--color-text); line-height:1.6}
+    button,input,select,textarea{font:inherit}
+    .skip-link{position:absolute;left:-9999px;top:auto}.skip-link:focus{left:1rem;top:1rem;background:var(--color-primary);color:var(--color-text-inverse);padding:.75rem 1rem;border-radius:var(--radius-md);z-index:10}
+    .shell{max-width:1180px;margin:0 auto;padding:var(--space-4)}
+    .topbar{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);padding:var(--space-4) 0}
+    .brand{display:flex;align-items:center;gap:.8rem;font-weight:700}
+    .brand svg{width:38px;height:38px;color:var(--color-primary)}
+    .brand span{font-size:var(--text-lg)}
+    .theme-toggle{min-width:44px;min-height:44px;border:1px solid var(--color-border);border-radius:var(--radius-full);display:grid;place-items:center;background:var(--color-surface);color:var(--color-text)}
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--space-8);align-items:start;padding:var(--space-8) 0 var(--space-12)}
+    .hero-copy h1{font-family:var(--font-display);font-size:var(--text-2xl);line-height:1.02;margin:0 0 var(--space-4)}
+    .hero-copy p{font-size:var(--text-base);color:var(--color-text-muted);max-width:58ch;margin:0 0 var(--space-6)}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)}
+    .stat{background:color-mix(in srgb, var(--color-surface) 86%, transparent);border:1px solid var(--color-border);padding:var(--space-4);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+    .stat strong{display:block;font-size:var(--text-lg)}
+    .panel{background:color-mix(in srgb, var(--color-surface) 94%, transparent);border:1px solid var(--color-border);border-radius:calc(var(--radius-lg) + 2px);box-shadow:var(--shadow-md)}
+    .form-panel{padding:var(--space-6)}
+    .panel h2{margin:0 0 var(--space-2);font-size:var(--text-xl)}
+    .panel p{margin:0 0 var(--space-6);color:var(--color-text-muted)}
+    form{display:grid;gap:var(--space-4)}
+    .grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}
+    .field{display:grid;gap:.45rem}
+    label{font-size:var(--text-sm);font-weight:700}
+    input,select,textarea{width:100%;border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);border-radius:var(--radius-md);padding:.9rem 1rem;min-height:48px;outline:none}
+    textarea{min-height:120px;resize:vertical}
+    input:focus,select:focus,textarea:focus{border-color:var(--color-primary);box-shadow:0 0 0 4px color-mix(in srgb, var(--color-primary) 20%, transparent)}
+    .actions{display:flex;flex-wrap:wrap;gap:var(--space-3);padding-top:var(--space-2)}
+    .btn{min-height:48px;padding:.9rem 1.2rem;border-radius:var(--radius-full);border:none;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:.6rem}
+    .btn-primary{background:var(--color-primary);color:var(--color-text-inverse)}
+    .btn-primary:hover{background:var(--color-primary-hover)}
+    .btn-secondary{background:transparent;border:1px solid var(--color-border);color:var(--color-text)}
+    .summary{padding:var(--space-6);display:grid;gap:var(--space-4)}
+    .summary-card{background:var(--color-surface-2);border:1px solid var(--color-border);padding:var(--space-4);border-radius:var(--radius-lg)}
+    .summary-card h3{margin:0 0 .35rem;font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-muted)}
+    .summary-card strong{font-size:var(--text-lg)}
+    .log{padding:var(--space-6) var(--space-6) var(--space-8)}
+    .log-list{display:grid;gap:var(--space-3);margin-top:var(--space-4)}
+    .entry{padding:var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-lg);background:var(--color-surface)}
+    .entry small{color:var(--color-text-muted)}
+    .empty{padding:var(--space-6);border:1px dashed var(--color-border);border-radius:var(--radius-lg);color:var(--color-text-muted);text-align:center;background:color-mix(in srgb, var(--color-surface) 85%, transparent)}
+    .badge{display:inline-flex;align-items:center;gap:.45rem;width:max-content;padding:.45rem .8rem;border-radius:var(--radius-full);background:color-mix(in srgb, var(--color-accent) 18%, transparent);color:var(--color-primary);font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+    footer{padding:var(--space-8) 0 var(--space-4);color:var(--color-text-muted);font-size:var(--text-sm)}
+    @media (max-width: 900px){.hero{grid-template-columns:1fr}.grid-2,.stats{grid-template-columns:1fr}}
+    @media (prefers-reduced-motion: reduce){*{scroll-behavior:auto;transition:none !important}}
+  </style>
 </head>
 <body>
-    <div class="shell" id="app">
-        <header class="topbar">
-            <div class="brand">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-                <span data-i18n="brand">Café Success</span>
+  <a class="skip-link" href="#contenido" data-i18n="skip">Saltar al contenido</a>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand" data-i18n="brand.ariaLabel" data-i18n-attr="aria-label">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" data-i18n="logo.ariaLabel" data-i18n-attr="aria-label">
+          <path d="M18 22h24c0 14-5 22-12 22s-12-8-12-22Z" stroke="currentColor" stroke-width="3.5"/>
+          <path d="M42 25h5c4 0 7 3 7 7s-3 7-7 7h-3" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+          <path d="M22 15c-2 3-1 5 1 7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M31 12c-2 3-1 5 1 7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M40 15c-2 3-1 5 1 7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          <path d="M14 48h36" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+        <span data-i18n="brand.name">Café · Captura de pedidos</span>
+      </div>
+      <button class="theme-toggle" type="button" data-theme-toggle data-i18n="theme.toggle.aria" data-i18n-attr="aria-label">
+        <span aria-hidden="true">◐</span>
+      </button>
+      <select id="langSelect" data-i18n="form.langSelect" data-i18n-attr="aria-label" aria-label="Seleccionar idioma">
+        <option value="ru">Русский</option>
+        <option value="es">Español</option>
+      </select>
+    </header>
+
+    <main id="contenido">
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="badge" data-i18n="badge.quickEntry">Entrada rápida</span>
+          <h1 data-i18n="hero.h1">Registra pedidos, clientes y notas del turno en una sola vista.</h1>
+          <p data-i18n="hero.p">Esta página está pensada como una primera base para tu repositorio <strong>cafe</strong>: permite capturar datos del cliente, tipo de bebida, tamaño, estado del pedido y observaciones, con un resumen inmediato en pantalla.</p>
+          <div class="stats" data-i18n="stats.ariaLabel" data-i18n-attr="aria-label">
+            <article class="stat"><span data-i18n="stats.fieldsLabel">Campos clave</span><strong data-i18n="stats.fieldsValue">8</strong></article>
+            <article class="stat"><span data-i18n="stats.visualModeLabel">Modo visual</span><strong data-i18n="stats.visualModeValue">Claro/Oscuro</strong></article>
+            <article class="stat"><span data-i18n="stats.storageLabel">Almacenamiento</span><strong data-i18n="stats.storageValue">Local en memoria</strong></article>
+          </div>
+        </div>
+
+        <section class="panel form-panel" aria-labelledby="form-title">
+          <h2 id="form-title" data-i18n="form.title">Nuevo registro</h2>
+          <p data-i18n="form.description">Completa el formulario y guarda la entrada para verla reflejada en el panel lateral.</p>
+          <form id="orderForm">
+            <div class="grid-2">
+              <div class="field">
+                <label for="customer" data-i18n="form.labels.customer">Cliente</label>
+                <input id="customer" name="customer" placeholder="Ej. Carlos Tarazona" data-i18n="form.placeholders.customer" data-i18n-attr="placeholder" required />
+              </div>
+              <div class="field">
+                <label for="phone" data-i18n="form.labels.phone">Teléfono</label>
+                <input id="phone" name="phone" placeholder="+7 900 000 00 00" data-i18n="form.placeholders.phone" data-i18n-attr="placeholder" />
+              </div>
             </div>
-            <button class="btn btn-secondary" data-theme-toggle>◐</button>
-        </header>
-
-        <main class="hero">
-            <div class="hero-copy">
-                <h1 data-i18n="hero-title">Оценка потенциальной успешности</h1>
-                <p data-i18n="hero-desc">Введите параметры вашего заведения для расчета вероятности успеха с помощью системы нечеткой логики.</p>
+            <div class="grid-2">
+              <div class="field">
+                <label for="drink" data-i18n="form.labels.drink">Bebida</label>
+                <select id="drink" name="drink" required>
+                  <option value="" data-i18n="form.placeholders.drink"></option>
+                  <option value="espresso" data-i18n="form.options.drink.espresso">Espresso</option>
+                  <option value="americano" data-i18n="form.options.drink.americano">Americano</option>
+                  <option value="capuccino" data-i18n="form.options.drink.capuccino">Capuccino</option>
+                  <option value="latte" data-i18n="form.options.drink.latte">Latte</option>
+                  <option value="mocha" data-i18n="form.options.drink.mocha">Mocha</option>
+                  <option value="teaChai" data-i18n="form.options.drink.teaChai">Té chai</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="size" data-i18n="form.labels.size">Tamaño</label>
+                <select id="size" name="size" required>
+                  <option value="" data-i18n="form.placeholders.size"></option>
+                  <option value="small" data-i18n="form.options.size.small">Pequeño</option>
+                  <option value="medium" data-i18n="form.options.size.medium">Mediano</option>
+                  <option value="large" data-i18n="form.options.size.large">Grande</option>
+                </select>
+              </div>
             </div>
+            <div class="grid-2">
+              <div class="field">
+                <label for="sugar" data-i18n="form.labels.sugar">Azúcar</label>
+                <input id="sugar" name="sugar" type="number" min="0" max="5" value="0" />
+              </div>
+              <div class="field">
+                <label for="status" data-i18n="form.labels.status">Estado</label>
+                <select id="status" name="status">
+                  <option value="new" data-i18n="form.options.status.new">Nuevo</option>
+                  <option value="preparing" data-i18n="form.options.status.preparing">En preparación</option>
+                  <option value="ready" data-i18n="form.options.status.ready">Listo</option>
+                  <option value="delivered" data-i18n="form.options.status.delivered">Entregado</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="notes" data-i18n="form.labels.notes">Notas</label>
+              <textarea id="notes" name="notes" placeholder="Sin lactosa, extra canela, cliente frecuente..." data-i18n="form.placeholders.notes" data-i18n-attr="placeholder"></textarea>
+            </div>
+            <div class="actions">
+              <button class="btn btn-primary" type="submit" data-i18n="form.buttons.save">Guardar registro</button>
+              <button class="btn btn-secondary" type="reset" data-i18n="form.buttons.reset">Limpiar formulario</button>
+            </div>
+          </form>
+        </section>
+      </section>
 
-            <section class="panel form-panel">
-                <h2 data-i18n="form-title">Параметры заведения</h2>
-                <form id="evaluationForm">
-                    <div class="grid-2">
-                        <div class="field">
-                            <label data-i18n="label-type">Тип заведения</label>
-                            <select id="type" required>
-                                <option value="" data-i18n="opt-select">Выберите...</option>
-                                <option value="coffee" data-i18n="opt-type-1">Кофейня</option>
-                                <option value="fastfood" data-i18n="opt-type-2">Фастфуд</option>
-                                <option value="family" data-i18n="opt-type-3">Семейный ресторан</option>
-                                <option value="author" data-i18n="opt-type-4">Авторская кухня</option>
-                                <option value="pizza" data-i18n="opt-type-5">Пиццерия</option>
-                                <option value="sushi" data-i18n="opt-type-6">Суши-бар</option>
-                                <option value="burger" data-i18n="opt-type-7">Бургерная</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label data-i18n="label-location">Локация</label>
-                            <select id="location" required>
-                                <option value="" data-i18n="opt-select">Выберите...</option>
-                                <option value="center" data-i18n="opt-loc-1">Центр</option>
-                                <option value="residential" data-i18n="opt-loc-2">Спальный район</option>
-                                <option value="business" data-i18n="opt-loc-3">Деловой квартал</option>
-                                <option value="metro" data-i18n="opt-loc-4">У метро</option>
-                                <option value="shopping" data-i18n="opt-loc-5">Торговая улица</option>
-                                <option value="alley" data-i18n="opt-loc-6">Переулок</option>
-                                <option value="station" data-i18n="opt-loc-7">Вокзал</option>
-                                <option value="airport" data-i18n="opt-loc-8">Аэропорт</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="grid-2">
-                        <div class="field">
-                            <label data-i18n="label-competitors">Конкуренты</label>
-                            <select id="competitors" required>
-                                <option value="0">0</option>
-                                <option value="1-2">1–2</option>
-                                <option value="3-5">3–5</option>
-                                <option value=">5">> 5</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label data-i18n="label-parking">Парковка</label>
-                            <select id="parking" required>
-                                <option value="none" data-i18n="opt-park-1">Отсутствует</option>
-                                <option value="paid" data-i18n="opt-park-2">Платная</option>
-                                <option value="free" data-i18n="opt-park-3">Бесплатная</option>
-                            </select>
-                        </div>
-                    </div>
+      <section class="hero" style="padding-top:0; align-items:stretch;">
+        <aside class="panel summary" aria-labelledby="summary-title">
+          <div>
+            <span class="badge" data-i18n="badge.summary">Resumen</span>
+            <h2 id="summary-title" data-i18n="summary.title">Estado actual</h2>
+          </div>
+          <div class="summary-card">
+            <h3 data-i18n="summary.totalRecords">Total de registros</h3>
+            <strong id="totalEntries">0</strong>
+          </div>
+          <div class="summary-card">
+            <h3 data-i18n="summary.lastDrink">Última bebida</h3>
+            <strong id="lastDrink">Sin registros</strong>
+          </div>
+          <div class="summary-card">
+            <h3 data-i18n="summary.lastStatus">Último estado</h3>
+            <strong id="lastStatus">Sin registros</strong>
+          </div>
+        </aside>
 
-                    <div class="field">
-                        <label data-i18n="label-entrance">Тип входа</label>
-                        <select id="entrance" required>
-                            <option value="street" data-i18n="opt-ent-1">С улицы</option>
-                            <option value="mall" data-i18n="opt-ent-2">Внутри ТЦ</option>
-                            <option value="arch" data-i18n="opt-ent-3">Через арку</option>
-                            <option value="basement" data-i18n="opt-ent-4">Цокольный этаж</option>
-                            <option value="2nd" data-i18n="opt-ent-5">Второй этаж</option>
-                            <option value="above" data-i18n="opt-ent-6">Выше второго этажа</option>
-                        </select>
-                    </div>
+        <section class="panel log" aria-labelledby="log-title">
+          <span class="badge" data-i18n="badge.activity">Actividad</span>
+          <h2 id="log-title" data-i18n="log.title">Entradas recientes</h2>
+          <p data-i18n="log.description">Cada envío se añade a esta lista en tiempo real para validar la estructura del formulario.</p>
+          <div id="emptyState" class="empty" data-i18n="log.empty">Aún no hay registros. Usa el formulario para crear la primera entrada.</div>
+          <div id="logList" class="log-list" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
 
-                    <div class="grid-2">
-                        <div class="field">
-                            <label data-i18n="label-check">Средний чек</label>
-                            <select id="check" required>
-                                <option value="low" data-i18n="opt-check-1">Низкий (<500₽)</option>
-                                <option value="medium" data-i18n="opt-check-2">Средний (500–1500₽)</option>
-                                <option value="high" data-i18n="opt-check-3">Высокий (1500–3000₽)</option>
-                                <option value="premium" data-i18n="opt-check-4">Премиум (>3000₽)</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label data-i18n="label-anchor">Якорь</label>
-                            <select id="anchor" required>
-                                <option value="none" data-i18n="opt-anch-1">Нет</option>
-                                <option value="mall" data-i18n="opt-anch-2">ТЦ</option>
-                                <option value="bc" data-i18n="opt-anch-3">Бизнес-центр</option>
-                                <option value="uni" data-i18n="opt-anch-4">Университет</option>
-                                <option value="college" data-i18n="opt-anch-5">Колледж</option>
-                                <option value="metro" data-i18n="opt-anch-6">Метро</option>
-                                <option value="tourist" data-i18n="opt-anch-7">Туристический объект</option>
-                            </select>
-                        </div>
-                    </div>
+    <footer data-i18n="footer">
+      Base estática pensada para publicarse en GitHub Pages o evolucionar hacia un panel con backend más adelante.
+    </footer>
+  </div>
 
-                    <div class="actions">
-                        <button type="submit" class="btn btn-primary" data-i18n="btn-calc">Рассчитать вероятность</button>
-                    </div>
-                </form>
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector('[data-theme-toggle]');
+    let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    root.setAttribute('data-theme', theme);
 
-                <div class="summary" style="margin-top: 20px;">
-                    <div class="summary-card">
-                        <h3 data-i18n="res-title">Результат оценки</h3>
-                        <strong id="resultDisplay" data-i18n="res-placeholder">Ожидание ввода...</strong>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
+    toggle.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+    });
 
-    <div class="lang-toggle">
-        <button class="btn btn-secondary" onclick="setLang('ru')">RU</button>
-        <button class="btn btn-secondary" onclick="setLang('es')">ES</button>
-    </div>
+    // I18N constants
+    const SUPPORTED_LANGS = ['ru', 'es'];
+    const DEFAULT_LANG = 'ru';
+    const LANG_KEY = 'lang';
+    const LOCALE_MAP = { es: 'es-ES', ru: 'ru-RU' };
 
-    <script>
-        const translations = {
-            ru: {
-                "brand": "Café Success",
-                "hero-title": "Оценка потенциальной успешности",
-                "hero-desc": "Введите параметры вашего заведения для расчета вероятности успеха с помощью системы нечеткой логики.",
-                "form-title": "Параметры заведения",
-                "label-type": "Тип заведения",
-                "label-location": "Локация",
-                "label-competitors": "Конкуренты",
-                "label-parking": "Парковка",
-                "label-entrance": "Тип входа",
-                "label-check": "Средний чек",
-                "label-anchor": "Якорь",
-                "opt-select": "Выберите...",
-                "opt-type-1": "Кофейня", "opt-type-2": "Фастфуд", "opt-type-3": "Семейный ресторан", "opt-type-4": "Авторская кухня", "opt-type-5": "Пиццерия", "opt-type-6": "Суши-бар", "opt-type-7": "Бургерная",
-                "opt-loc-1": "Центр", "opt-loc-2": "Спальный район", "opt-loc-3": "Деловой квартал", "opt-loc-4": "У метро", "opt-loc-5": "Торговая улица", "opt-loc-6": "Переулок", "opt-loc-7": "Вокзал", "opt-loc-8": "Аэропорт",
-                "opt-park-1": "Отсутствует", "opt-park-2": "Платная", "opt-park-3": "Бесплатная",
-                "opt-ent-1": "С улицы", "opt-ent-2": "Внутри ТЦ", "opt-ent-3": "Через арку", "opt-ent-4": "Цокольный этаж", "opt-ent-5": "Второй этаж", "opt-ent-6": "Выше второго этажа",
-                "opt-check-1": "Низкий (<500₽)", "opt-check-2": "Средний (500-1500₽)", "opt-check-3": "Высокий (1500-3000₽)", "opt-check-4": "Премиум (>3000₽)",
-                "opt-anch-1": "Нет", "opt-anch-2": "ТЦ", "opt-anch-3": "Бизнес-центр", "opt-anch-4": "Университет", "opt-anch-5": "Колледж", "opt-anch-6": "Метро", "opt-anch-7": "Туристический объект",
-                "btn-calc": "Рассчитать вероятность",
-                "res-title": "Результат оценки",
-                "res-placeholder": "Ожидание ввода...",
-                "res-success": "Вероятность успеха рассчитана (демо)"
-            },
-            es: {
-                "brand": "Café Éxito",
-                "hero-title": "Evaluación de Éxito Potencial",
-                "hero-desc": "Ingrese los parámetros de su establecimiento para calcular la probabilidad de éxito mediante lógica difusa.",
-                "form-title": "Parámetros del Local",
-                "label-type": "Tipo de local",
-                "label-location": "Ubicación",
-                "label-competitors": "Competidores",
-                "label-parking": "Estacionamiento",
-                "label-entrance": "Tipo de entrada",
-                "label-check": "Ticket promedio",
-                "label-anchor": "Ancla",
-                "opt-select": "Seleccione...",
-                "opt-type-1": "Cafetería", "opt-type-2": "Comida rápida", "opt-type-3": "Restaurante familiar", "opt-type-4": "Cocina de autor", "opt-type-5": "Pizzería", "opt-type-6": "Sushi bar", "opt-type-7": "Hamburguesería",
-                "opt-loc-1": "Centro", "opt-loc-2": "Residencial", "opt-loc-3": "Distrito negocios", "opt-loc-4": "Cerca metro", "opt-loc-5": "Calle comercial", "opt-loc-6": "Callejón", "opt-loc-7": "Estación", "opt-loc-8": "Aeropuerto",
-                "opt-park-1": "Inexistente", "opt-park-2": "De pago", "opt-park-3": "Gratuito",
-                "opt-ent-1": "Desde calle", "opt-ent-2": "Dentro de CC", "opt-ent-3": "Por arco", "opt-ent-4": "Semisótano", "opt-ent-5": "Segundo piso", "opt-ent-6": "Piso superior",
-                "opt-check-1": "Bajo (<500₽)", "opt-check-2": "Medio (500-1500₽)", "opt-check-3": "Alto (1500-3000₽)", "opt-check-4": "Premium (>3000₽)",
-                "opt-anch-1": "Ninguna", "opt-anch-2": "Centro comercial", "opt-anch-3": "Business center", "opt-anch-4": "Universidad", "opt-anch-5": "Colegio", "opt-anch-6": "Metro", "opt-anch-7": "Atracción turística",
-                "btn-calc": "Calcular probabilidad",
-                "res-title": "Resultado de la evaluación",
-                "res-placeholder": "Esperando datos...",
-                "res-success": "Probabilidad calculada (demo)"
-            }
-        };
+    const translations = {
+      ru: {
+        meta: { title: "Кафе · Ввод данных", description: "Статическое приложение для регистрации заказов и клиентов кафе." },
+        skip: "Перейти к содержимому",
+        brand: { name: "Кафе · Фиксация заказов", ariaLabel: "Ввод данных кафе" },
+        logo: { ariaLabel: "Логотип кафе" },
+        theme: { toggleAria: "Сменить тему", mode: "Светлая/Тёмная" },
+        form: {
+          langSelect: "Выбрать язык",
+          title: "Новая запись",
+          description: "Заполните форму и сохраните запись, чтобы увидеть её в боковой панели.",
+          labels: { customer: "Клиент", phone: "Телефон", drink: "Напиток", size: "Размер", sugar: "Сахар", status: "Статус", notes: "Заметки" },
+          placeholders: { customer: "Напр. Иван Иванов", phone: "+7 900 000 00 00", drink: "Выберите вариант", size: "Выберите размер", notes: "Без лактозы, доп. корицы, постоянный клиент..." },
+          options: {
+            drink: { espresso: "Эспрессо", americano: "Американо", capuccino: "Капучино", latte: "Латте", mocha: "Мокко", teaChai: "Чай масала" },
+            size: { small: "Маленький", medium: "Средний", large: "Большой" },
+            status: { new: "Новый", preparing: "В приготовлении", ready: "Готов", delivered: "Выдан" }
+          },
+          buttons: { save: "Сохранить запись", reset: "Очистить форму" }
+        },
+        badge: { quickEntry: "Быстрый ввод", summary: "Сводка", activity: "Активность" },
+        hero: { h1: "Регистрируйте заказы, клиентов и заметки смены в одном окне.", p: "Эта страница задумана как первоначальная база для вашего репозитория <strong>cafe</strong>: позволяет фиксировать данные клиента, тип напитка, размер, статус заказа и заметки с мгновенным сводом на экране." },
+        stats: { ariaLabel: "Визуальное резюме", fieldsLabel: "Ключевые поля", fieldsValue: "8", visualModeLabel: "Режим отображения", visualModeValue: "Светлая/Тёмная", storageLabel: "Хранение", storageValue: "Локально в памяти" },
+        summary: { title: "Текущее состояние", totalRecords: "Всего записей", lastDrink: "Последний напиток", lastStatus: "Последний статус" },
+        log: { badge: "Активность", title: "Последние записи", description: "Каждая отправка добавляется в этот список в реальном времени, чтобы проверить структуру формы.", empty: "Записей ещё нет. Используйте форму, чтобы создать первую запись.", noNotes: "Без дополнительных заметок.", sugarLabel: "Сахар: {sugar}." },
+        footer: "Статическая база, предназначенная для публикации на GitHub Pages или для развития в панель с бэкендом в будущем."
+      },
+      es: {
+        meta: { title: "Café · Entrada de datos", description: "Aplicación estática para registrar pedidos y clientes de una cafetería." },
+        skip: "Saltar al contenido",
+        brand: { name: "Café · Captura de pedidos", ariaLabel: "Entrada de datos del café" },
+        logo: { ariaLabel: "Logotipo de café" },
+        theme: { toggleAria: "Cambiar tema", mode: "Claro/Oscuro" },
+        form: {
+          langSelect: "Seleccionar idioma",
+          title: "Nuevo registro",
+          description: "Completa el formulario y guarda la entrada para verla reflejada en el panel lateral.",
+          labels: { customer: "Cliente", phone: "Teléfono", drink: "Bebida", size: "Tamaño", sugar: "Azúcar", status: "Estado", notes: "Notas" },
+          placeholders: { customer: "Ej. Carlos Tarazona", phone: "+7 900 000 00 00", drink: "Selecciona una opción", size: "Selecciona tamaño", notes: "Sin lactosa, extra canela, cliente frecuente..." },
+          options: {
+            drink: { espresso: "Espresso", americano: "Americano", capuccino: "Capuccino", latte: "Latte", mocha: "Mocha", teaChai: "Té chai" },
+            size: { small: "Pequeño", medium: "Mediano", large: "Grande" },
+            status: { new: "Nuevo", preparing: "En preparación", ready: "Listo", delivered: "Entregado" }
+          },
+          buttons: { save: "Guardar registro", reset: "Limpiar formulario" }
+        },
+        badge: { quickEntry: "Entrada rápida", summary: "Resumen", activity: "Actividad" },
+        hero: { h1: "Registra pedidos, clientes y notas del turno en una sola vista.", p: "Esta página está pensada como una primera base para tu repositorio <strong>cafe</strong>: permite capturar datos del cliente, tipo de bebida, tamaño, estado del pedido y observaciones, con un resumen inmediato en pantalla." },
+        stats: { ariaLabel: "Resumen visual", fieldsLabel: "Campos clave", fieldsValue: "8", visualModeLabel: "Modo visual", visualModeValue: "Claro/Oscuro", storageLabel: "Almacenamiento", storageValue: "Local en memoria" },
+        summary: { title: "Estado actual", totalRecords: "Total de registros", lastDrink: "Última bebida", lastStatus: "Último estado" },
+        log: { badge: "Actividad", title: "Entradas recientes", description: "Cada envío se añade a esta lista en tiempo real para validar la estructura del formulario.", empty: "Aún no hay registros. Usa el formulario para crear la primera entrada.", noNotes: "Sin notas adicionales.", sugarLabel: "Azúcar: {sugar}." },
+        footer: "Base estática pensada para publicarse en GitHub Pages o evolucionar hacia un panel con backend más adelante."
+      }
+    };
 
-        function setLang(lang) {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.textContent = translations[lang][key];
-            });
-            document.documentElement.lang = lang;
-        }
+    function getNested(obj, path) {
+      return path.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
+    }
 
-        // Default to Russian
-        setLang('ru');
+    function t(lang, key, vars) {
+      const str = getNested(translations[lang], key) || getNested(translations['es'], key) || key;
+      if (!vars) return str;
+      return str.replace(/\{(\w+)\}/g, (_, name) => (vars[name] !== undefined ? vars[name] : ''));
+    }
 
-        // Theme toggle
-        const root = document.documentElement;
-        const toggle = document.querySelector('[data-theme-toggle]');
-        let theme = 'light';
-        toggle.addEventListener('click', () => {
-            theme = theme === 'dark' ? 'light' : 'dark';
-            root.setAttribute('data-theme', theme);
+    function applyTranslations(lang) {
+      document.documentElement.lang = lang;
+      const docTitle = getNested(translations[lang], 'meta.title') || translations['es'].meta.title;
+      document.title = docTitle;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', getNested(translations[lang], 'meta.description') || translations['es'].meta.description);
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        const attr = el.getAttribute('data-i18n-attr');
+        const value = t(lang, key);
+        if (attr) el.setAttribute(attr, value);
+        else el.innerHTML = value;
+      });
+
+      document.querySelectorAll('option[data-i18n]').forEach(opt => {
+        const key = opt.getAttribute('data-i18n');
+        opt.textContent = t(lang, key);
+      });
+    }
+
+    function getCurrentLang() {
+      return localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
+    }
+
+    function initI18n() {
+      const sel = document.getElementById('langSelect');
+      const saved = localStorage.getItem(LANG_KEY) || DEFAULT_LANG;
+      if (sel) {
+        sel.value = saved;
+        sel.addEventListener('change', (e) => {
+          const v = e.target.value;
+          localStorage.setItem(LANG_KEY, v);
+          applyTranslations(v);
+          renderEntries();
         });
+      }
+      applyTranslations(saved);
+    }
 
-        // Form handling
-        document.getElementById('evaluationForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const lang = document.documentElement.lang;
-            document.getElementById('resultDisplay').textContent = translations[lang]['res-success'];
-        });
-    </script>
+    const entries = [];
+    const form = document.getElementById('orderForm');
+    const logList = document.getElementById('logList');
+    const emptyState = document.getElementById('emptyState');
+    const totalEntries = document.getElementById('totalEntries');
+    const lastDrink = document.getElementById('lastDrink');
+    const lastStatus = document.getElementById('lastStatus');
+
+    function renderEntries() {
+      const lang = getCurrentLang();
+      totalEntries.textContent = entries.length;
+      if (!entries.length) {
+        emptyState.hidden = false;
+        logList.innerHTML = '';
+        lastDrink.textContent = t(lang, 'log.empty');
+        lastStatus.textContent = t(lang, 'log.empty');
+        return;
+      }
+
+      emptyState.hidden = true;
+      const latest = entries[0];
+      lastDrink.textContent = t(lang, `form.options.drink.${latest.drink}`) || latest.drink;
+      lastStatus.textContent = t(lang, `form.options.status.${latest.status}`) || latest.status;
+
+      logList.innerHTML = '';
+      entries.forEach(entry => {
+        const art = document.createElement('article'); art.className = 'entry';
+        const strong = document.createElement('strong'); strong.textContent = entry.customer;
+        const small = document.createElement('small');
+        const drinkLabel = t(lang, `form.options.drink.${entry.drink}`) || entry.drink;
+        const sizeLabel = t(lang, `form.options.size.${entry.size}`) || entry.size;
+        const statusLabel = t(lang, `form.options.status.${entry.status}`) || entry.status;
+        small.textContent = `${drinkLabel} · ${sizeLabel} · ${statusLabel}`;
+        const p = document.createElement('p');
+        const sugarText = t(lang, 'log.sugarLabel', { sugar: entry.sugar });
+        const notesText = entry.notes ? entry.notes : t(lang, 'log.noNotes');
+        p.textContent = `${sugarText} ${notesText}`;
+        const small2 = document.createElement('small');
+        small2.textContent = (entry.phone ? entry.phone + ' · ' : '') + entry.timestamp;
+        art.appendChild(strong); art.appendChild(small); art.appendChild(p); art.appendChild(small2);
+        logList.appendChild(art);
+      });
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const lang = getCurrentLang();
+      const locale = LOCALE_MAP[lang] || LOCALE_MAP['es'];
+      const entry = {
+        customer: data.get('customer').trim(),
+        phone: data.get('phone').trim(),
+        drink: data.get('drink'),
+        size: data.get('size'),
+        sugar: data.get('sugar'),
+        status: data.get('status'),
+        notes: data.get('notes').trim(),
+        timestamp: new Intl.DateTimeFormat(locale, { dateStyle: 'short', timeStyle: 'short' }).format(new Date())
+      };
+      entries.unshift(entry);
+      renderEntries();
+      form.reset();
+      document.getElementById('customer').focus();
+    });
+
+    initI18n();
+    renderEntries();
+  </script>
 </body>
 </html>
