@@ -51,6 +51,11 @@
     .field{display:grid;gap:.45rem}
     label{font-size:var(--text-sm);font-weight:700}
     input,select,textarea{width:100%;border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);border-radius:var(--radius-md);padding:.9rem 1rem;min-height:48px;outline:none}
+    /* Lang select visual improvements */
+    .lang-select{min-width:140px;min-height:44px;padding-right:2.4rem;appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:pointer;background-image:linear-gradient(transparent,transparent), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236f4e37' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");background-repeat:no-repeat;background-position:right 0.75rem center, right 0.75rem center;background-size:1rem;}
+    .lang-select:focus{border-color:var(--color-primary);box-shadow:0 0 0 4px color-mix(in srgb, var(--color-primary) 20%, transparent)}
+    /* Ensure contrast in dark theme */
+    [data-theme="dark"] .lang-select{background-image:linear-gradient(transparent,transparent), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23c08a5b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");color:var(--color-text);background-color:var(--color-surface);border:1px solid var(--color-border)}
     textarea{min-height:120px;resize:vertical}
     input:focus,select:focus,textarea:focus{border-color:var(--color-primary);box-shadow:0 0 0 4px color-mix(in srgb, var(--color-primary) 20%, transparent)}
     .actions{display:flex;flex-wrap:wrap;gap:var(--space-3);padding-top:var(--space-2)}
@@ -91,7 +96,7 @@
       <button class="theme-toggle" type="button" data-theme-toggle data-i18n="theme.toggle.aria" data-i18n-attr="aria-label">
         <span aria-hidden="true">◐</span>
       </button>
-      <select id="langSelect" data-i18n="form.langSelect" data-i18n-attr="aria-label" aria-label="Seleccionar idioma">
+      <select id="langSelect" class="lang-select" data-i18n="form.langSelect" data-i18n-attr="aria-label" aria-label="Seleccionar idioma">
         <option value="ru">Русский</option>
         <option value="es">Español</option>
       </select>
