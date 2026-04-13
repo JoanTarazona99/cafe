@@ -1,18 +1,24 @@
-name: Build and deploy to gh-pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
 
@@ -22,32 +28,11 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy dist to repo root on main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -e
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch --all
-          git checkout main
-          # Remove all files except .git and .github
-          shopt -s extglob || true
-          for f in ./* ./.??*; do
-            case "$f" in
-              ./.) continue ;;
-              ./.git) continue ;;
-              ./.github) continue ;;
-            esac
-            rm -rf "$f" || true
-          done
-          # Copy built files from dist into repo root
-          cp -a dist/. ./
-          git status --porcelain
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No changes to deploy"
-          else
-            git commit -m "chore(deploy): publish dist to repo root [skip ci]"
-            git push origin main
-          fi
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
