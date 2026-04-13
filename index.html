@@ -129,50 +129,105 @@
                 <input id="phone" name="phone" placeholder="+7 900 000 00 00" data-i18n="form.placeholders.phone" data-i18n-attr="placeholder" />
               </div>
             </div>
+
             <div class="grid-2">
               <div class="field">
-                <label for="drink" data-i18n="form.labels.drink">Bebida</label>
-                <select id="drink" name="drink" required>
-                  <option value="" data-i18n="form.placeholders.drink"></option>
-                  <option value="espresso" data-i18n="form.options.drink.espresso">Espresso</option>
-                  <option value="americano" data-i18n="form.options.drink.americano">Americano</option>
-                  <option value="capuccino" data-i18n="form.options.drink.capuccino">Capuccino</option>
-                  <option value="latte" data-i18n="form.options.drink.latte">Latte</option>
-                  <option value="mocha" data-i18n="form.options.drink.mocha">Mocha</option>
-                  <option value="teaChai" data-i18n="form.options.drink.teaChai">Té chai</option>
+                <label for="cuisine" data-i18n="form.labels.cuisine">Tipo de cocina</label>
+                <select id="cuisine" name="cuisine" required>
+                  <option value="" data-i18n="form.placeholders.cuisine"></option>
+                  <option value="cafeteria" data-i18n="form.options.cuisine.cafeteria">Cafetería</option>
+                  <option value="fastfood" data-i18n="form.options.cuisine.fastfood">Comida rápida</option>
+                  <option value="family" data-i18n="form.options.cuisine.family">Restaurante familiar</option>
+                  <option value="author" data-i18n="form.options.cuisine.author">Cocina de autor</option>
+                  <option value="pizzeria" data-i18n="form.options.cuisine.pizzeria">Pizzería</option>
+                  <option value="sushibar" data-i18n="form.options.cuisine.sushibar">Sushi-bar</option>
+                  <option value="burger" data-i18n="form.options.cuisine.burger">Hamburguesería</option>
                 </select>
               </div>
               <div class="field">
-                <label for="size" data-i18n="form.labels.size">Tamaño</label>
-                <select id="size" name="size" required>
-                  <option value="" data-i18n="form.placeholders.size"></option>
-                  <option value="small" data-i18n="form.options.size.small">Pequeño</option>
-                  <option value="medium" data-i18n="form.options.size.medium">Mediano</option>
-                  <option value="large" data-i18n="form.options.size.large">Grande</option>
+                <label for="location" data-i18n="form.labels.location">Локация / Ubicación</label>
+                <select id="location" name="location" required>
+                  <option value="" data-i18n="form.placeholders.location"></option>
+                  <option value="center" data-i18n="form.options.location.center">Centro</option>
+                  <option value="residential" data-i18n="form.options.location.residential">Barrio residencial</option>
+                  <option value="business" data-i18n="form.options.location.business">Distrito de negocios</option>
+                  <option value="metro" data-i18n="form.options.location.metro">Cerca del metro</option>
+                  <option value="shopping" data-i18n="form.options.location.shopping">Calle comercial</option>
+                  <option value="alley" data-i18n="form.options.location.alley">Calle secundaria</option>
+                  <option value="station" data-i18n="form.options.location.station">Estación</option>
+                  <option value="airport" data-i18n="form.options.location.airport">Aeropuerto</option>
                 </select>
               </div>
             </div>
+
             <div class="grid-2">
               <div class="field">
-                <label for="sugar" data-i18n="form.labels.sugar">Azúcar</label>
-                <input id="sugar" name="sugar" type="number" min="0" max="5" value="0" />
+                <label for="competitors" data-i18n="form.labels.competitors">Competencia</label>
+                <select id="competitors" name="competitors" required>
+                  <option value="" data-i18n="form.placeholders.competitors"></option>
+                  <option value="0" data-i18n="form.options.competitors.0">0</option>
+                  <option value="1-2" data-i18n="form.options.competitors.1-2">1–2</option>
+                  <option value="3-5" data-i18n="form.options.competitors.3-5">3–5</option>
+                  <option value="5+" data-i18n="form.options.competitors.5+">Más de 5</option>
+                </select>
               </div>
               <div class="field">
-                <label for="status" data-i18n="form.labels.status">Estado</label>
-                <select id="status" name="status">
-                  <option value="new" data-i18n="form.options.status.new">Nuevo</option>
-                  <option value="preparing" data-i18n="form.options.status.preparing">En preparación</option>
-                  <option value="ready" data-i18n="form.options.status.ready">Listo</option>
-                  <option value="delivered" data-i18n="form.options.status.delivered">Entregado</option>
+                <label for="parking" data-i18n="form.labels.parking">Парковка / Parking</label>
+                <select id="parking" name="parking" required>
+                  <option value="" data-i18n="form.placeholders.parking"></option>
+                  <option value="none" data-i18n="form.options.parking.none">Inexistente</option>
+                  <option value="paid" data-i18n="form.options.parking.paid">De pago</option>
+                  <option value="free" data-i18n="form.options.parking.free">Gratuita</option>
                 </select>
               </div>
             </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="entrance" data-i18n="form.labels.entrance">Тип входа / Entrada</label>
+                <select id="entrance" name="entrance" required>
+                  <option value="" data-i18n="form.placeholders.entrance"></option>
+                  <option value="street" data-i18n="form.options.entrance.street">Desde la calle</option>
+                  <option value="mall" data-i18n="form.options.entrance.mall">Dentro de un centro comercial</option>
+                  <option value="arch" data-i18n="form.options.entrance.arch">A través de un arco</option>
+                  <option value="basement" data-i18n="form.options.entrance.basement">Sótano</option>
+                  <option value="second" data-i18n="form.options.entrance.second">Segundo piso</option>
+                  <option value="aboveSecond" data-i18n="form.options.entrance.aboveSecond">Piso superior</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="avgCheck" data-i18n="form.labels.avgCheck">Средний чек / Ticket medio</label>
+                <select id="avgCheck" name="avgCheck" required>
+                  <option value="" data-i18n="form.placeholders.avgCheck"></option>
+                  <option value="low" data-i18n="form.options.avgCheck.low">Bajo: menos de 500</option>
+                  <option value="mid" data-i18n="form.options.avgCheck.mid">Medio: 500–1500</option>
+                  <option value="high" data-i18n="form.options.avgCheck.high">Alto: 1500–3000</option>
+                  <option value="premium" data-i18n="form.options.avgCheck.premium">Premium: más de 3000</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="anchor" data-i18n="form.labels.anchor">Наличие «якоря» / Ancla</label>
+              <select id="anchor" name="anchor" required>
+                <option value="" data-i18n="form.placeholders.anchor"></option>
+                <option value="none" data-i18n="form.options.anchor.none">Ninguno</option>
+                <option value="mall" data-i18n="form.options.anchor.mall">Centro comercial</option>
+                <option value="business_center" data-i18n="form.options.anchor.business_center">Centro de negocios</option>
+                <option value="university" data-i18n="form.options.anchor.university">Universidad</option>
+                <option value="college" data-i18n="form.options.anchor.college">Colegio / Instituto</option>
+                <option value="metro" data-i18n="form.options.anchor.metro">Metro</option>
+                <option value="tourist" data-i18n="form.options.anchor.tourist">Atracción turística</option>
+              </select>
+            </div>
+
             <div class="field">
               <label for="notes" data-i18n="form.labels.notes">Notas</label>
-              <textarea id="notes" name="notes" placeholder="Sin lactosa, extra canela, cliente frecuente..." data-i18n="form.placeholders.notes" data-i18n-attr="placeholder"></textarea>
+              <textarea id="notes" name="notes" placeholder="Observaciones opcionales..." data-i18n="form.placeholders.notes" data-i18n-attr="placeholder"></textarea>
             </div>
+
             <div class="actions">
-              <button class="btn btn-primary" type="submit" data-i18n="form.buttons.save">Guardar registro</button>
+              <button class="btn btn-primary" type="submit" data-i18n="form.buttons.calculate">Рассчитать успешность</button>
               <button class="btn btn-secondary" type="reset" data-i18n="form.buttons.reset">Limpiar formulario</button>
             </div>
           </form>
@@ -242,18 +297,61 @@
           langSelect: "Выбрать язык",
           title: "Новая запись",
           description: "Заполните форму и сохраните запись, чтобы увидеть её в боковой панели.",
-          labels: { customer: "Клиент", phone: "Телефон", drink: "Напиток", size: "Размер", sugar: "Сахар", status: "Статус", notes: "Заметки" },
-          placeholders: { customer: "Напр. Иван Иванов", phone: "+7 900 000 00 00", drink: "Выберите вариант", size: "Выберите размер", notes: "Без лактозы, доп. корицы, постоянный клиент..." },
-          options: {
-            drink: { espresso: "Эспрессо", americano: "Американо", capuccino: "Капучино", latte: "Латте", mocha: "Мокко", teaChai: "Чай масала" },
-            size: { small: "Маленький", medium: "Средний", large: "Большой" },
-            status: { new: "Новый", preparing: "В приготовлении", ready: "Готов", delivered: "Выдан" }
+          labels: {
+            customer: "Клиент",
+            phone: "Телефон",
+            cuisine: "Тип кухни",
+            location: "Локация",
+            competitors: "Конкуренты",
+            parking: "Парковка",
+            entrance: "Тип входа",
+            avgCheck: "Средний чек",
+            anchor: "Якорь",
+            notes: "Заметки"
           },
-          buttons: { save: "Сохранить запись", reset: "Очистить форму" }
+          placeholders: {
+            customer: "Напр. Иван Иванов",
+            phone: "+7 900 000 00 00",
+            cuisine: "Выберите тип кухни",
+            location: "Выберите локацию",
+            competitors: "Выберите количество",
+            parking: "Выберите парковку",
+            entrance: "Выберите тип входа",
+            avgCheck: "Выберите средний чек",
+            anchor: "Выберите привязку",
+            notes: "Без дополнительных примечаний"
+          },
+          options: {
+            cuisine: {
+              cafeteria: "Кофейня",
+              fastfood: "Фастфуд",
+              family: "Семейный ресторан",
+              author: "Авторская кухня",
+              pizzeria: "Пиццерия",
+              sushibar: "Суши-бар",
+              burger: "Бургерная"
+            },
+            location: {
+              center: "Центр",
+              residential: "Спальный район",
+              business: "Деловой квартал",
+              metro: "У метро",
+              shopping: "Торговая улица",
+              alley: "Переулок",
+              station: "Вокзал",
+              airport: "Аэропорт"
+            },
+            competitors: { "0": "0", "1-2": "1–2", "3-5": "3–5", "5+": "Более 5" },
+            parking: { none: "Отсутствует", paid: "Платная", free: "Бесплатная" },
+            entrance: { street: "С улицы", mall: "Внутри ТЦ", arch: "Через арку", basement: "Цокольный этаж", second: "Второй этаж", aboveSecond: "Выше второго этажа" },
+            avgCheck: { low: "Низкий: менее 500", mid: "Средний: 500–1500", high: "Высокий: 1500–3000", premium: "Премиум: более 3000" },
+            anchor: { none: "Нет", mall: "ТЦ", business_center: "Бизнес-центр", university: "Университет", college: "Колледж", metro: "Метро", tourist: "Туристический объект" }
+          },
+          buttons: { calculate: "Рассчитать успешность", reset: "Очистить форму" }
         },
         badge: { quickEntry: "Быстрый ввод", summary: "Сводка", activity: "Активность" },
         hero: { h1: "Регистрируйте заказы, клиентов и заметки смены в одном окне.", p: "Эта страница задумана как первоначальная база для вашего репозитория <strong>cafe</strong>: позволяет фиксировать данные клиента, тип напитка, размер, статус заказа и заметки с мгновенным сводом на экране." },
-        stats: { ariaLabel: "Визуальное резюме", fieldsLabel: "Ключевые поля", fieldsValue: "8", visualModeLabel: "Режим отображения", visualModeValue: "Светлая/Тёмная", storageLabel: "Хранение", storageValue: "Локально в памяти" },
+        stats: { ariaLabel: "Визуальное резюме", fieldsLabel: "Ключевые поля", fieldsValue: "7", visualModeLabel: "Режим отображения", visualModeValue: "Светлая/Тёмная", storageLabel: "Хранение", storageValue: "Локально в памяти" },
         summary: { title: "Текущее состояние", totalRecords: "Всего записей", lastDrink: "Последний напиток", lastStatus: "Последний статус" },
         log: { badge: "Активность", title: "Последние записи", description: "Каждая отправка добавляется в этот список в реальном времени, чтобы проверить структуру формы.", empty: "Записей ещё нет. Используйте форму, чтобы создать первую запись.", noNotes: "Без дополнительных заметок.", sugarLabel: "Сахар: {sugar}." },
         footer: "Статическая база, предназначенная для публикации на GitHub Pages или для развития в панель с бэкендом в будущем."
@@ -268,18 +366,61 @@
           langSelect: "Seleccionar idioma",
           title: "Nuevo registro",
           description: "Completa el formulario y guarda la entrada para verla reflejada en el panel lateral.",
-          labels: { customer: "Cliente", phone: "Teléfono", drink: "Bebida", size: "Tamaño", sugar: "Azúcar", status: "Estado", notes: "Notas" },
-          placeholders: { customer: "Ej. Carlos Tarazona", phone: "+7 900 000 00 00", drink: "Selecciona una opción", size: "Selecciona tamaño", notes: "Sin lactosa, extra canela, cliente frecuente..." },
-          options: {
-            drink: { espresso: "Espresso", americano: "Americano", capuccino: "Capuccino", latte: "Latte", mocha: "Mocha", teaChai: "Té chai" },
-            size: { small: "Pequeño", medium: "Mediano", large: "Grande" },
-            status: { new: "Nuevo", preparing: "En preparación", ready: "Listo", delivered: "Entregado" }
+          labels: {
+            customer: "Cliente",
+            phone: "Teléfono",
+            cuisine: "Tipo de cocina",
+            location: "Ubicación",
+            competitors: "Competencia",
+            parking: "Parking",
+            entrance: "Entrada",
+            avgCheck: "Ticket medio",
+            anchor: "Ancla",
+            notes: "Notas"
           },
-          buttons: { save: "Guardar registro", reset: "Limpiar formulario" }
+          placeholders: {
+            customer: "Ej. Carlos Tarazona",
+            phone: "+7 900 000 00 00",
+            cuisine: "Selecciona tipo de cocina",
+            location: "Selecciona ubicación",
+            competitors: "Selecciona cantidad",
+            parking: "Selecciona parking",
+            entrance: "Selecciona tipo de entrada",
+            avgCheck: "Selecciona ticket medio",
+            anchor: "Selecciona ancla",
+            notes: "Sin notas adicionales"
+          },
+          options: {
+            cuisine: {
+              cafeteria: "Cafetería",
+              fastfood: "Comida rápida",
+              family: "Restaurante familiar",
+              author: "Cocina de autor",
+              pizzeria: "Pizzería",
+              sushibar: "Sushi-bar",
+              burger: "Hamburguesería"
+            },
+            location: {
+              center: "Centro",
+              residential: "Barrio residencial",
+              business: "Distrito de negocios",
+              metro: "Cerca del metro",
+              shopping: "Calle comercial",
+              alley: "Calle secundaria",
+              station: "Estación",
+              airport: "Aeropuerto"
+            },
+            competitors: { "0": "0", "1-2": "1–2", "3-5": "3–5", "5+": "Más de 5" },
+            parking: { none: "Inexistente", paid: "De pago", free: "Gratuita" },
+            entrance: { street: "Desde la calle", mall: "Dentro de un centro comercial", arch: "A través de un arco", basement: "Sótano", second: "Segundo piso", aboveSecond: "Piso superior" },
+            avgCheck: { low: "Bajo: menos de 500", mid: "Medio: 500–1500", high: "Alto: 1500–3000", premium: "Premium: más de 3000" },
+            anchor: { none: "Ninguno", mall: "Centro comercial", business_center: "Centro de negocios", university: "Universidad", college: "Colegio", metro: "Metro", tourist: "Atracción turística" }
+          },
+          buttons: { calculate: "Calcular éxito", reset: "Limpiar formulario" }
         },
         badge: { quickEntry: "Entrada rápida", summary: "Resumen", activity: "Actividad" },
         hero: { h1: "Registra pedidos, clientes y notas del turno en una sola vista.", p: "Esta página está pensada como una primera base para tu repositorio <strong>cafe</strong>: permite capturar datos del cliente, tipo de bebida, tamaño, estado del pedido y observaciones, con un resumen inmediato en pantalla." },
-        stats: { ariaLabel: "Resumen visual", fieldsLabel: "Campos clave", fieldsValue: "8", visualModeLabel: "Modo visual", visualModeValue: "Claro/Oscuro", storageLabel: "Almacenamiento", storageValue: "Local en memoria" },
+        stats: { ariaLabel: "Resumen visual", fieldsLabel: "Campos clave", fieldsValue: "7", visualModeLabel: "Modo visual", visualModeValue: "Claro/Oscuro", storageLabel: "Almacenamiento", storageValue: "Local en memoria" },
         summary: { title: "Estado actual", totalRecords: "Total de registros", lastDrink: "Última bebida", lastStatus: "Último estado" },
         log: { badge: "Actividad", title: "Entradas recientes", description: "Cada envío se añade a esta lista en tiempo real para validar la estructura del formulario.", empty: "Aún no hay registros. Usa el formulario para crear la primera entrada.", noNotes: "Sin notas adicionales.", sugarLabel: "Azúcar: {sugar}." },
         footer: "Base estática pensada para publicarse en GitHub Pages o evolucionar hacia un panel con backend más adelante."
@@ -357,25 +498,41 @@
 
       emptyState.hidden = true;
       const latest = entries[0];
-      lastDrink.textContent = t(lang, `form.options.drink.${latest.drink}`) || latest.drink;
-      lastStatus.textContent = t(lang, `form.options.status.${latest.status}`) || latest.status;
+      // Mostrar cuisine y location en los campos de resumen reutilizados
+      lastDrink.textContent = t(lang, `form.options.cuisine.${latest.cuisine}`) || latest.cuisine;
+      lastStatus.textContent = t(lang, `form.options.location.${latest.location}`) || latest.location;
 
       logList.innerHTML = '';
       entries.forEach(entry => {
-        const art = document.createElement('article'); art.className = 'entry';
-        const strong = document.createElement('strong'); strong.textContent = entry.customer;
-        const small = document.createElement('small');
-        const drinkLabel = t(lang, `form.options.drink.${entry.drink}`) || entry.drink;
-        const sizeLabel = t(lang, `form.options.size.${entry.size}`) || entry.size;
-        const statusLabel = t(lang, `form.options.status.${entry.status}`) || entry.status;
-        small.textContent = `${drinkLabel} · ${sizeLabel} · ${statusLabel}`;
-        const p = document.createElement('p');
-        const sugarText = t(lang, 'log.sugarLabel', { sugar: entry.sugar });
-        const notesText = entry.notes ? entry.notes : t(lang, 'log.noNotes');
-        p.textContent = `${sugarText} ${notesText}`;
-        const small2 = document.createElement('small');
-        small2.textContent = (entry.phone ? entry.phone + ' · ' : '') + entry.timestamp;
-        art.appendChild(strong); art.appendChild(small); art.appendChild(p); art.appendChild(small2);
+        const art = document.createElement('article');
+        art.className = 'entry';
+
+        const header = document.createElement('div');
+        const strong = document.createElement('strong'); strong.textContent = entry.customer || '';
+        const meta = document.createElement('small'); meta.textContent = (entry.phone ? entry.phone + ' · ' : '') + entry.timestamp;
+        header.appendChild(strong); header.appendChild(meta);
+
+        const dl = document.createElement('dl');
+        const addRow = (labelKey, value) => {
+          const dt = document.createElement('dt'); dt.textContent = t(lang, labelKey);
+          const dd = document.createElement('dd'); dd.textContent = value || '';
+          dl.appendChild(dt); dl.appendChild(dd);
+        };
+
+        addRow('form.labels.cuisine', t(lang, `form.options.cuisine.${entry.cuisine}`) || entry.cuisine);
+        addRow('form.labels.location', t(lang, `form.options.location.${entry.location}`) || entry.location);
+        addRow('form.labels.competitors', t(lang, `form.options.competitors.${entry.competitors}`) || entry.competitors);
+        addRow('form.labels.parking', t(lang, `form.options.parking.${entry.parking}`) || entry.parking);
+        addRow('form.labels.entrance', t(lang, `form.options.entrance.${entry.entrance}`) || entry.entrance);
+        addRow('form.labels.avgCheck', t(lang, `form.options.avgCheck.${entry.avgCheck}`) || entry.avgCheck);
+        addRow('form.labels.anchor', t(lang, `form.options.anchor.${entry.anchor}`) || entry.anchor);
+
+        if (entry.notes) {
+          addRow('entry.labels.notes' || 'form.labels.notes', entry.notes);
+        }
+
+        art.appendChild(header);
+        art.appendChild(dl);
         logList.appendChild(art);
       });
     }
@@ -386,13 +543,16 @@
       const lang = getCurrentLang();
       const locale = LOCALE_MAP[lang] || LOCALE_MAP['es'];
       const entry = {
-        customer: data.get('customer').trim(),
-        phone: data.get('phone').trim(),
-        drink: data.get('drink'),
-        size: data.get('size'),
-        sugar: data.get('sugar'),
-        status: data.get('status'),
-        notes: data.get('notes').trim(),
+        customer: (data.get('customer') || '').trim(),
+        phone: (data.get('phone') || '').trim(),
+        cuisine: data.get('cuisine') || '',
+        location: data.get('location') || '',
+        competitors: data.get('competitors') || '',
+        parking: data.get('parking') || '',
+        entrance: data.get('entrance') || '',
+        avgCheck: data.get('avgCheck') || '',
+        anchor: data.get('anchor') || '',
+        notes: (data.get('notes') || '').trim(),
         timestamp: new Intl.DateTimeFormat(locale, { dateStyle: 'short', timeStyle: 'short' }).format(new Date())
       };
       entries.unshift(entry);
