@@ -163,13 +163,7 @@
             <div class="grid-2">
               <div class="field">
                 <label for="competitors" data-i18n="form.labels.competitors">Competencia</label>
-                <select id="competitors" name="competitors" required>
-                  <option value="" data-i18n="form.placeholders.competitors"></option>
-                  <option value="0" data-i18n="form.options.competitors.0">0</option>
-                  <option value="1-2" data-i18n="form.options.competitors.1-2">1–2</option>
-                  <option value="3-5" data-i18n="form.options.competitors.3-5">3–5</option>
-                  <option value="5+" data-i18n="form.options.competitors.5+">Más de 5</option>
-                </select>
+                <input id="competitors" name="competitors" type="number" min="0" step="1" placeholder="" data-i18n="form.placeholders.competitors" data-i18n-attr="placeholder" required />
               </div>
               <div class="field">
                 <label for="parking" data-i18n="form.labels.parking">Парковка / Parking</label>
@@ -197,13 +191,7 @@
               </div>
               <div class="field">
                 <label for="avgCheck" data-i18n="form.labels.avgCheck">Средний чек / Ticket medio</label>
-                <select id="avgCheck" name="avgCheck" required>
-                  <option value="" data-i18n="form.placeholders.avgCheck"></option>
-                  <option value="low" data-i18n="form.options.avgCheck.low">Bajo: menos de 500</option>
-                  <option value="mid" data-i18n="form.options.avgCheck.mid">Medio: 500–1500</option>
-                  <option value="high" data-i18n="form.options.avgCheck.high">Alto: 1500–3000</option>
-                  <option value="premium" data-i18n="form.options.avgCheck.premium">Premium: más de 3000</option>
-                </select>
+                <input id="avgCheck" name="avgCheck" type="number" min="0" step="1" placeholder="" data-i18n="form.placeholders.avgCheck" data-i18n-attr="placeholder" required />
               </div>
             </div>
 
@@ -314,10 +302,10 @@
             phone: "+7 900 000 00 00",
             cuisine: "Выберите тип кухни",
             location: "Выберите локацию",
-            competitors: "Выберите количество",
+            competitors: "Введите число конкурентов (например, 3)",
             parking: "Выберите парковку",
             entrance: "Выберите тип входа",
-            avgCheck: "Выберите средний чек",
+            avgCheck: "Введите средний чек (например, 1200)",
             anchor: "Выберите привязку",
             notes: "Без дополнительных примечаний"
           },
@@ -383,10 +371,10 @@
             phone: "+7 900 000 00 00",
             cuisine: "Selecciona tipo de cocina",
             location: "Selecciona ubicación",
-            competitors: "Selecciona cantidad",
+            competitors: "Introduce número de competidores (ej. 3)",
             parking: "Selecciona parking",
             entrance: "Selecciona tipo de entrada",
-            avgCheck: "Selecciona ticket medio",
+            avgCheck: "Introduce ticket medio (ej. 1200)",
             anchor: "Selecciona ancla",
             notes: "Sin notas adicionales"
           },
@@ -487,6 +475,7 @@
 
     function renderEntries() {
       const lang = getCurrentLang();
+      const locale = LOCALE_MAP[lang] || LOCALE_MAP['es'];
       totalEntries.textContent = entries.length;
       if (!entries.length) {
         emptyState.hidden = false;
@@ -521,14 +510,20 @@
 
         addRow('form.labels.cuisine', t(lang, `form.options.cuisine.${entry.cuisine}`) || entry.cuisine);
         addRow('form.labels.location', t(lang, `form.options.location.${entry.location}`) || entry.location);
-        addRow('form.labels.competitors', t(lang, `form.options.competitors.${entry.competitors}`) || entry.competitors);
+
+        const competitorsDisplay = (entry.competitors !== null && entry.competitors !== '') ? String(entry.competitors) : '';
+        addRow('form.labels.competitors', competitorsDisplay);
+
         addRow('form.labels.parking', t(lang, `form.options.parking.${entry.parking}`) || entry.parking);
         addRow('form.labels.entrance', t(lang, `form.options.entrance.${entry.entrance}`) || entry.entrance);
-        addRow('form.labels.avgCheck', t(lang, `form.options.avgCheck.${entry.avgCheck}`) || entry.avgCheck);
+
+        const avgDisplay = (entry.avgCheck !== null && entry.avgCheck !== '') ? new Intl.NumberFormat(locale).format(entry.avgCheck) : '';
+        addRow('form.labels.avgCheck', avgDisplay);
+
         addRow('form.labels.anchor', t(lang, `form.options.anchor.${entry.anchor}`) || entry.anchor);
 
         if (entry.notes) {
-          addRow('entry.labels.notes' || 'form.labels.notes', entry.notes);
+          addRow('form.labels.notes' , entry.notes);
         }
 
         art.appendChild(header);
@@ -542,15 +537,21 @@
       const data = new FormData(form);
       const lang = getCurrentLang();
       const locale = LOCALE_MAP[lang] || LOCALE_MAP['es'];
+
+      const competitorsRaw = data.get('competitors');
+      const competitors = (competitorsRaw === null || competitorsRaw === '') ? null : parseInt(competitorsRaw, 10);
+      const avgRaw = data.get('avgCheck');
+      const avgCheck = (avgRaw === null || avgRaw === '') ? null : Number(avgRaw);
+
       const entry = {
         customer: (data.get('customer') || '').trim(),
         phone: (data.get('phone') || '').trim(),
         cuisine: data.get('cuisine') || '',
         location: data.get('location') || '',
-        competitors: data.get('competitors') || '',
+        competitors,
         parking: data.get('parking') || '',
         entrance: data.get('entrance') || '',
-        avgCheck: data.get('avgCheck') || '',
+        avgCheck,
         anchor: data.get('anchor') || '',
         notes: (data.get('notes') || '').trim(),
         timestamp: new Intl.DateTimeFormat(locale, { dateStyle: 'short', timeStyle: 'short' }).format(new Date())
