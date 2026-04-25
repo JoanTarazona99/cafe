@@ -28,7 +28,7 @@ const translations = {
     form: {
       langSelect: 'Выбрать язык',
       title: 'Новый сценарий',
-      description: 'Заполните форму и сохраните запись, чтобы увидеть её в боковой панели.',
+      description: 'Заполните форму и сохраните сценарий, чтобы увидеть его в боковой панели.',
       labels: {
         customer: 'Клиент',
         phone: 'Телефон',
@@ -64,15 +64,15 @@ const translations = {
     },
     badge: { quickEntry: 'БЫСТРЫЙ ВВОД', summary: 'Сводка', activity: 'Активность' },
     hero: {
-      h1: 'Фиксируйте параметры заведения и анализируйте сценарии открытия..',
+      h1: 'Фиксируйте параметры заведения и анализируйте сценарии открытия.',
       p: 'Эта страница задумана как первоначальная база для вашего репозитория <strong>cafe</strong>: позволяет фиксировать данные клиента, тип кухни, локацию, конкурентов, парковку и прочее с мгновенным сводом на экране.',
     },
     stats: { ariaLabel: 'Визуальное резюме', fieldsLabel: 'Ключевые поля', fieldsValue: '9', visualModeLabel: 'Режим отображения', visualModeValue: 'Светлая/Тёмная', storageLabel: 'Хранение', storageValue: 'Локально в памяти' },
     summary: { title: 'Текущее состояние', totalRecords: 'Всего сценариев', lastCuisine: 'Последняя кухня', lastLocation: 'Последняя локация' },
     log: {
       title: 'Последние сценарии',
-      description: 'Каждая отправка добавляется в этот список в реальном времени, чтобы проверить структуру формы.',
-      empty: 'Записей ещё нет. Используйте форму, чтобы создать первую запись.',
+      description: 'Каждый сохранённый сценарий отображается в списке для быстрого сравнения.',
+      empty: 'Записей ещё нет. Используйте форму, чтобы создать первый сценарий.',
       noNotes: 'Без дополнительных заметок.',
     },
     footer: 'Статическая база, предназначенная для публикации на GitHub Pages или для развития в панель с бэкендом в будущем.',
@@ -85,7 +85,7 @@ const translations = {
     form: {
       langSelect: 'Seleccionar idioma',
       title: 'Nuevo escenario',
-      description: 'Registra los parámetros del local y analiza escenarios de apertura.',
+      description: 'Rellena el formulario y guarda el escenario para verlo en la barra lateral.',
       labels: {
         customer: 'Cliente',
         phone: 'Teléfono',
@@ -128,8 +128,8 @@ const translations = {
     summary: { title: 'Estado actual', totalRecords: 'Total de escenarios', lastCuisine: 'Última cocina', lastLocation: 'Última ubicación' },
     log: {
       title: 'Últimos escenarios',
-      description: 'Cada envío se añade a esta lista en tiempo real para validar la estructura del formulario.',
-      empty: 'Aún no hay registros. Usa el formulario para crear la primera entrada.',
+      description: 'Cada escenario guardado se muestra en la lista para comparación rápida.',
+      empty: 'Aún no hay entradas. Usa el formulario para crear el primer escenario.',
       noNotes: 'Sin notas adicionales.',
     },
     footer: 'Base estática pensada para publicarse en GitHub Pages o evolucionar hacia un panel con backend más adelante.',
