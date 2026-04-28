@@ -6,7 +6,6 @@ type Lang = 'ru' | 'es';
 
 interface Entry {
   customer: string;
-  phone: string;
   cuisine: string;
   location: string;
   competitors: string;
@@ -30,8 +29,7 @@ const translations = {
       title: 'Новый сценарий',
       description: 'Заполните форму и сохраните сценарий, чтобы увидеть его в боковой панели.',
       labels: {
-        customer: 'Клиент',
-        phone: 'Телефон',
+        customer: 'Название',
         cuisine: 'Тип кухни',
         location: 'Локация',
         competitors: 'Конкуренты (кол-во)',
@@ -43,7 +41,6 @@ const translations = {
       },
       placeholders: {
         customer: 'Напр. Иван Иванов',
-        phone: '+7 900 000 00 00',
         cuisine: 'Выберите тип кухни',
         location: 'Выберите локацию',
         competitors: 'Напр. 3',
@@ -87,8 +84,7 @@ const translations = {
       title: 'Nuevo escenario',
       description: 'Rellena el formulario y guarda el escenario para verlo en la barra lateral.',
       labels: {
-        customer: 'Cliente',
-        phone: 'Teléfono',
+        customer: 'Nombre',
         cuisine: 'Tipo de cocina',
         location: 'Ubicación',
         competitors: 'Competidores (cantidad)',
@@ -100,7 +96,6 @@ const translations = {
       },
       placeholders: {
         customer: 'Ej. Carlos Tarazona',
-        phone: '+7 900 000 00 00',
         cuisine: 'Selecciona tipo de cocina',
         location: 'Selecciona ubicación',
         competitors: 'Ej. 3',
@@ -227,7 +222,6 @@ function NumericField({ id, label, value, onChange, placeholder, min = 0, requir
     <Field label={label}>
       <input
         id={id}
-        type="number"
         min={min}
         step="1"
         value={value}
@@ -260,7 +254,7 @@ function EntryCard({ entry, lang }: { entry: Entry; lang: Lang }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', marginBottom: '0.75rem' }}>
         <strong>{entry.customer}</strong>
         <small style={{ color: 'var(--color-text-muted)' }}>
-          {entry.phone ? `${entry.phone} · ` : ''}{entry.timestamp}
+          {entry.timestamp}
         </small>
       </div>
       <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '0.25rem 1rem', fontSize: 'var(--text-sm)', margin: 0 }}>
@@ -288,7 +282,6 @@ export default function App() {
 
   // Form state
   const [customer, setCustomer] = useState('');
-  const [phone, setPhone] = useState('');
   const [cuisine, setCuisine] = useState('');
   const [location, setLocation] = useState('');
   const [competitors, setCompetitors] = useState('');
@@ -318,7 +311,6 @@ export default function App() {
     e.preventDefault();
     const entry: Entry = {
       customer: customer.trim(),
-      phone: phone.trim(),
       cuisine,
       location,
       competitors: competitors.trim(),
@@ -331,7 +323,7 @@ export default function App() {
     };
     setEntries(prev => [entry, ...prev]);
     // reset
-    setCustomer(''); setPhone(''); setCuisine(''); setLocation('');
+    setCustomer(''); setCuisine(''); setLocation('');
     setCompetitors(''); setParking(''); setEntrance('');
     setAvgCheck(''); setAnchor(''); setNotes('');
     setTimeout(() => customerRef.current?.focus(), 50);
@@ -502,7 +494,7 @@ export default function App() {
               <p>{tr('form.description')}</p>
 
               <form onSubmit={handleSubmit} onReset={() => {
-                setCustomer(''); setPhone(''); setCuisine(''); setLocation('');
+                setCustomer(''); setCuisine(''); setLocation('');
                 setCompetitors(''); setParking(''); setEntrance('');
                 setAvgCheck(''); setAnchor(''); setNotes('');
               }}>
@@ -519,15 +511,7 @@ export default function App() {
                       required
                     />
                   </Field>
-                  <Field label={tr('form.labels.phone')}>
-                    <input
-                      id="phone"
-                      type="tel"
-                      value={phone}
-                      onChange={e => setPhone(e.target.value)}
-                      placeholder={tr('form.placeholders.phone')}
-                    />
-                  </Field>
+                  {/* phone field removed */}
                 </div>
 
                 {/* Row 2 */}
