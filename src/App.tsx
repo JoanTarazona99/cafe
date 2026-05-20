@@ -308,7 +308,7 @@ export default function App() {
 
   const tr = (path: string) => t(lang, path);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const entry: Entry = {
       customer: customer.trim(),
@@ -322,12 +322,34 @@ export default function App() {
       notes: notes.trim(),
       timestamp: formatNow(lang),
     };
-    setEntries(prev => [entry, ...prev]);
-    // reset
-    setCustomer(''); setCuisine(''); setLocation('');
-    setCompetitors(''); setParking(''); setEntrance('');
-    setAvgCheck(''); setAnchor(''); setNotes('');
-    setTimeout(() => customerRef.current?.focus(), 50);
+
+    try {
+      // Send POST to backend
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+      const response = await fetch(`${backendUrl}/api/cafe/analyze`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(entry),
+      });
+
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const message = await response.text();
+      
+      // Add to entries (show locally)
+      setEntries(prev => [entry, ...prev]);
+      
+      // Show success message in console
+      console.log('Backend response:', message);
+      
+      // Reset form
+      setCustomer(''); setCuisine(''); setLocation('');
+      setCompetitors(''); setParking(''); setEntrance('');
+      setAvgCheck(''); setAnchor(''); setNotes('');
+      setTimeout(() => customerRef.current?.focus(), 50);
+    } catch (error) {
+      console.error('Error sending data to backend:', error);
+      alert(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
   }
 
   const latest = entries[0];
