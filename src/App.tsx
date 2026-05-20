@@ -194,13 +194,14 @@ interface SelectFieldProps {
   value: string;
   onChange: (v: string) => void;
   required?: boolean;
+  disabled?: boolean;
   options: { value: string; label: string }[];
   placeholder: string;
 }
-function SelectField({ id, label, value, onChange, required, options, placeholder }: SelectFieldProps) {
+function SelectField({ id, label, value, onChange, required, disabled, options, placeholder }: SelectFieldProps) {
   return (
     <Field label={label}>
-      <select id={id} value={value} onChange={e => onChange(e.target.value)} required={required}>
+      <select id={id} value={value} onChange={e => onChange(e.target.value)} required={required} disabled={disabled}>
         <option value="">{placeholder}</option>
         {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
       </select>
@@ -586,7 +587,7 @@ export default function App() {
                   label={tr('form.labels.anchor')}
                   value={anchor}
                   onChange={setAnchor}
-                  required
+                  disabled={true}
                   options={anchorOptions}
                   placeholder={tr('form.placeholders.anchor')}
                 />
