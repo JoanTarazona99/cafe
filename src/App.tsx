@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Fragment } from 'react';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Theme = 'light' | 'dark';
@@ -261,8 +261,10 @@ function EntryCard({ entry, lang }: { entry: Entry; lang: Lang }) {
       <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '0.25rem 1rem', fontSize: 'var(--text-sm)', margin: 0 }}>
         {rows.map(([label, val]) => (
           val ? (
-            <><dt key={`dt-${label}`} style={{ color: 'var(--color-text-muted)', fontWeight: 700 }}>{label}</dt>
-              <dd key={`dd-${label}`} style={{ margin: 0 }}>{val}</dd></>
+            <Fragment key={label}>
+              <dt style={{ color: 'var(--color-text-muted)', fontWeight: 700 }}>{label}</dt>
+              <dd style={{ margin: 0 }}>{val}</dd>
+            </Fragment>
           ) : null
         ))}
       </dl>
@@ -325,7 +327,7 @@ export default function App() {
 
     try {
       // Send POST to backend
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+      const backendUrl = import.meta.env.VITE_BACKEND_URL ?? 'http://localhost:5000';
       const response = await fetch(`${backendUrl}/api/cafe/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

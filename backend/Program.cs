@@ -37,13 +37,11 @@ app.MapPost("/api/cafe/analyze", (CafeRequest request) =>
     // Retornar string de respuesta
     return $"Análisis completado para {request.Customer} el {request.Timestamp}";
 })
-.WithName("AnalyzeCafe")
-.WithOpenApi();
+.WithName("AnalyzeCafe");
 
 // Health check
 app.MapGet("/health", () => "OK")
-    .WithName("Health")
-    .WithOpenApi();
+    .WithName("Health");
 
 app.Run();
 
