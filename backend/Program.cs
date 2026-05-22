@@ -6,7 +6,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .WithOrigins("http://localhost:5173", "http://localhost:3000", "https://joantarazona99.github.io")
+            .WithOrigins("http://localhost:5173", "http://localhost:3000", "https://joantarazona99.github.io", "https://389d14fd.cafe-133.pages.dev", "https://cafe-133.pages.dev")
             .AllowAnyMethod()
             .AllowAnyHeader();
     });
