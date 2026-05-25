@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=4096 vite build",
+    "build:backend": "cross-env NODE_OPTIONS=--max-old-space-size=4096 vite build --outDir backend/wwwroot --base /",
     "preview": "vite preview"
   },
   "dependencies": {

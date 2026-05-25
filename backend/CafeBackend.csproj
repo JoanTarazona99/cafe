@@ -7,4 +7,8 @@
   </PropertyGroup>
 
 
+  <Target Name="BuildFrontend" BeforeTargets="Build">
+    <Exec Command="npm run build:backend" WorkingDirectory=".." />
+  </Target>
+
 </Project>

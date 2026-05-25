@@ -14,6 +14,10 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+// Servir archivos estáticos del frontend (wwwroot/)
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 // Usar CORS
 app.UseCors("AllowFrontend");
 
