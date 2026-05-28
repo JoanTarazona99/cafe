@@ -25,21 +25,21 @@ app.UseCors("AllowFrontend");
 app.MapPost("/api/cafe/analyze", (CafeRequest request) =>
 {
     // Imprimir datos en consola
-    Console.WriteLine("=== CAFE ANALYSIS REQUEST ===");
-    Console.WriteLine($"Customer: {request.Customer}");
-    Console.WriteLine($"Cuisine: {request.Cuisine}");
-    Console.WriteLine($"Location: {request.Location}");
-    Console.WriteLine($"Competitors: {request.Competitors}");
-    Console.WriteLine($"Parking: {request.Parking}");
-    Console.WriteLine($"Entrance: {request.Entrance}");
-    Console.WriteLine($"Average Check: {request.AvgCheck}");
-    Console.WriteLine($"Anchor: {request.Anchor}");
-    Console.WriteLine($"Notes: {request.Notes}");
-    Console.WriteLine($"Timestamp: {request.Timestamp}");
+    Console.WriteLine("=== ЗАПРОС НА АНАЛИЗ КАФЕ ===");
+    Console.WriteLine($"Клиент: {request.Customer}");
+    Console.WriteLine($"Кухня: {request.Cuisine}");
+    Console.WriteLine($"Расположение: {request.Location}");
+    Console.WriteLine($"Конкуренты: {request.Competitors}");
+    Console.WriteLine($"Парковка: {request.Parking}");
+    Console.WriteLine($"Вход: {request.Entrance}");
+    Console.WriteLine($"Средний чек: {request.AvgCheck}");
+    Console.WriteLine($"Якорь: {request.Anchor}");
+    Console.WriteLine($"Заметки: {request.Notes}");
+    Console.WriteLine($"Дата и время: {request.Timestamp}");
     Console.WriteLine("=============================\n");
 
     // Retornar string de respuesta
-    return $"Análisis completado para {request.Customer} el {request.Timestamp}";
+    return $"Анализ завершён для {request.Customer} — {request.Timestamp}";
 })
 .WithName("AnalyzeCafe");
 
